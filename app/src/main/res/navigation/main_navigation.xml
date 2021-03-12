@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.codedamon.medshare.ui.LoginPage.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_addMedicineFragment"
+            app:destination="@id/addMedicineFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.codedamon.medshare.ui.SignUpPage.SignUpFragment"
+        android:label="sign_up_fragment"
+        tools:layout="@layout/sign_up_fragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMedicineFragment"
+        android:name="com.codedamon.medshare.ui.AddMedicinePage.AddMedicineFragment"
+        android:label="add_medicine_fragment"
+        tools:layout="@layout/add_medicine_fragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.codedamon.medshare.ui.HomePage.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_boxDisplayFragment"
+            app:destination="@id/boxDisplayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxDisplayFragment"
+        android:name="com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayFragment"
+        android:label="box_display_fragment"
+        tools:layout="@layout/box_display_fragment" >
+        <action
+            android:id="@+id/action_boxDisplayFragment_to_qrPageFragment"
+            app:destination="@id/qrPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrPageFragment"
+        android:name="com.codedamon.medshare.ui.QrPage.QrPageFragment"
+        android:label="qr_fragment"
+        tools:layout="@layout/qr_fragment" />
+</navigation>
