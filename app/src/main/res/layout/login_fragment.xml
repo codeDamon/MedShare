@@ -6,10 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.LoginPage.LoginFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Login Page" />
+    <include layout="@layout/login_layout"
+        />
 
     <Button
         android:id="@+id/add_med_button"
@@ -27,6 +25,5 @@
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
