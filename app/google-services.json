@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "523130847241",
+    "project_id": "meddonate-9b487",
+    "storage_bucket": "meddonate-9b487.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523130847241:android:b94459b32fc5a72b68f8d8",
+        "android_client_info": {
+          "package_name": "com.codedamon.medshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523130847241-0q4ohn2cgun12qvbojbhla774em13fni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codedamon.medshare",
+            "certificate_hash": "9a89e9c7b13a43213de7133484c8099ce674f9a4"
+          }
+        },
+        {
+          "client_id": "523130847241-rpbujvb6tmrjl74n0l7u0c4tdq4f6j15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkPsFDGReCdwE4_646k2BNB896ubdElfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523130847241-rpbujvb6tmrjl74n0l7u0c4tdq4f6j15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

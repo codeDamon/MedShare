@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bottom_nav_shape"
         app:menu="@menu/bottom_navigation_menu"
-        />
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
 
 </LinearLayout>

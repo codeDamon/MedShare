@@ -2,18 +2,18 @@ package com.codedamon.medshare.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.codedamon.medshare.R
+import com.codedamon.medshare.ui.boxDisplayPage.MedicineViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var viewModel: MedicineViewModel
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
 
@@ -31,6 +31,4 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)*/
         bottomNavigationView.setupWithNavController(navController)
     }
-
-
 }
