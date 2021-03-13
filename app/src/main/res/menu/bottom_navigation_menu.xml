@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home_24"
         android:title="Home" />
-    <item
-        android:id="@+id/leader_board"
-        android:enabled="true"
-        android:icon="@drawable/ic_leaderboard_24"
-        android:title="Leaderboard" />
 
     <item
-        android:id="@+id/help_box"
+        android:id="@+id/boxDisplayFragment"
         android:enabled="true"
         android:icon="@drawable/ic_help_box_24"
         android:title="Help Box" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_account_box_24"
         android:title="My Profile" />

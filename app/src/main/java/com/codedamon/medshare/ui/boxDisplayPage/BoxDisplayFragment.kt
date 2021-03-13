@@ -37,7 +37,6 @@ class BoxDisplayFragment : Fragment(), MedicineBoxRvAdapter.MedBoxInterface {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(BoxDisplayViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +49,11 @@ class BoxDisplayFragment : Fragment(), MedicineBoxRvAdapter.MedBoxInterface {
         val generateQrBtn : ExtendedFloatingActionButton = view.findViewById(R.id.qr_button)
         generateQrBtn.setOnClickListener {
             navController.navigate(R.id.action_boxDisplayFragment_to_qrPageFragment)
+        }
+
+        val addMedBtn: Button = view.findViewById(R.id.add_med_button)
+        addMedBtn.setOnClickListener {
+            navController.navigate(R.id.action_boxDisplayFragment_to_addMedicineFragment)
         }
     }
 

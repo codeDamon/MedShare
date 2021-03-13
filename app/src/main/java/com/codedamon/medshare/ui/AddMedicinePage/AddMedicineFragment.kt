@@ -55,7 +55,7 @@ class AddMedicineFragment : Fragment() {
                                 view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
 
             expireDate.editText.let {
-                it?.setText("$dayOfMonth/$month/$year")
+                it?.setText("$dayOfMonth/${month+1}/$year")
             }
 
         }, year, month, dayOfMonth)

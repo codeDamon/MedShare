@@ -46,17 +46,9 @@ class HomeFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        val boxBtn : Button = view.findViewById(R.id.box_btn)
-        boxBtn.setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_boxDisplayFragment)
+        val loginFragBtn : Button = view.findViewById(R.id.login_button)
+        loginFragBtn.setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_loginFragment)
         }
-
-        val addMedFragBtn : Button = view.findViewById(R.id.add_med_button)
-        addMedFragBtn.setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_addMedicineFragment)
-        }
-
-
     }
-
 }

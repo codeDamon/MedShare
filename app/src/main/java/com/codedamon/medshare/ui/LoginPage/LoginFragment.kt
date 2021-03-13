@@ -30,21 +30,11 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-
-
-        val homeBtn : Button = view.findViewById(R.id.home_button)
-        homeBtn.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_homeFragment)
-        }
     }
-
-
-
 }

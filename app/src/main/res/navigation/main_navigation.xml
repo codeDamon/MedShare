@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -37,11 +34,8 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
-            android:id="@+id/action_homeFragment_to_boxDisplayFragment"
-            app:destination="@id/boxDisplayFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_addMedicineFragment"
-            app:destination="@id/addMedicineFragment" />
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
@@ -51,10 +45,18 @@
         <action
             android:id="@+id/action_boxDisplayFragment_to_qrPageFragment"
             app:destination="@id/qrPageFragment" />
+        <action
+            android:id="@+id/action_boxDisplayFragment_to_addMedicineFragment"
+            app:destination="@id/addMedicineFragment" />
     </fragment>
     <fragment
         android:id="@+id/qrPageFragment"
         android:name="com.codedamon.medshare.ui.QrPage.QrPageFragment"
         android:label="qr_fragment"
         tools:layout="@layout/qr_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.codedamon.medshare.ui.profilePage.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>
