@@ -51,6 +51,11 @@ class HomeFragment : Fragment() {
             navController.navigate(R.id.action_homeFragment_to_boxDisplayFragment)
         }
 
+        val addMedFragBtn : Button = view.findViewById(R.id.add_med_button)
+        addMedFragBtn.setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_addMedicineFragment)
+        }
+
 
     }
 

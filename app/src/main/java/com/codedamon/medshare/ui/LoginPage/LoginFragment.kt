@@ -38,10 +38,7 @@ class LoginFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        val addMedFragBtn : Button = view.findViewById(R.id.add_med_button)
-        addMedFragBtn.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_addMedicineFragment)
-        }
+
         val homeBtn : Button = view.findViewById(R.id.home_button)
         homeBtn.setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_homeFragment)
