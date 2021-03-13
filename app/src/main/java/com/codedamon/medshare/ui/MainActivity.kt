@@ -2,18 +2,16 @@ package com.codedamon.medshare.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.boxDisplayPage.MedicineViewModel
+import com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel: MedicineViewModel
+    lateinit var viewModel: BoxDisplayViewModel
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
 

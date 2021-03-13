@@ -22,7 +22,7 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
     companion object {
         fun newInstance() = BoxDisplayFragment()
     }
-    private lateinit var viewModel: MedicineViewModel
+    private lateinit var viewModel: BoxDisplayViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var navController: NavController
 
@@ -33,7 +33,7 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MedicineViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BoxDisplayViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,9 +54,15 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         recyclerView.hasFixedSize()
         adapter.notifyDataSetChanged()
 
+        /*
         viewModel=ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(MedicineViewModel::class.java)
-
+            ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(MedicineViewModel::class.java)
+        */
+        activity?.let {
+            viewModel=ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(it.application))
+                .get(BoxDisplayViewModel::class.java)
+        }
 
         viewModel.allMedicines.observe(viewLifecycleOwner, Observer {list->
             list?.let{
@@ -75,6 +81,7 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         addMedBtn.setOnClickListener {
             navController.navigate(R.id.action_boxDisplayFragment_to_addMedicineFragment)
         }
+
     }
 
     override fun onExpandClicked() {

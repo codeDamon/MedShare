@@ -8,4 +8,9 @@
     <string name="medicine_name">Medicine Name</string>
     <string name="earn_2_x">Earn 2 X</string>
     <string name="expiry_date">Expiry date</string>
+    <string name="medicine_information">Medicine Information</string>
+    <string name="name">Name</string>
+    <string name="price_per_item">Price per item</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_to_box">Add to Box</string>
 </resources>
