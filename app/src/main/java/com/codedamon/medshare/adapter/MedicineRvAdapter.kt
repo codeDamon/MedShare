@@ -15,18 +15,15 @@ import com.codedamon.medshare.model.Medicine
 
 
 class MedicineRvAdapter(
-    val context: Context,
-    private val list: ArrayList<Medicine>,
-    private val mInterface: MedBoxInterface
-)
+    val context: Context, private val mInterface: MedBoxInterface)
     : RecyclerView.Adapter<MedicineRvAdapter.MedBoxViewHolder>(){
 
+    private val allMedicine = ArrayList<Medicine>()
 
     interface MedBoxInterface{
         fun onExpandClicked();
     }
 
-    val allMedicine = ArrayList<Medicine>()
 
     inner class MedBoxViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -47,7 +44,7 @@ class MedicineRvAdapter(
         return MedBoxViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = allMedicine.size
 
     override fun onBindViewHolder(holder: MedBoxViewHolder, position: Int) {
         val currentMedicine = allMedicine[position]

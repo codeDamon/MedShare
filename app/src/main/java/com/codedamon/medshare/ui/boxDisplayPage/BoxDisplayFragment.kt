@@ -19,50 +19,20 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 
 class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
 
-    companion object {
-        fun newInstance() = BoxDisplayFragment()
-    }
     private lateinit var viewModel: BoxDisplayViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var navController: NavController
+    private lateinit var adapter : MedicineRvAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.box_display_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(BoxDisplayViewModel::class.java)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        recyclerView = view.findViewById(R.id.med_rv)
-        val medList = ArrayList<Medicine>()
-        val demoItem = Medicine("Paracetamol", 20.00, 2, "12/01/2022")
-        medList.add(demoItem)
-        medList.add(demoItem)
-        medList.add(demoItem)
-        medList.add(demoItem)
-
-        val adapter = MedicineRvAdapter(requireContext(),medList, this)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = adapter
-        recyclerView.hasFixedSize()
-        adapter.notifyDataSetChanged()
-
-        /*
-        viewModel=ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(Application())).get(MedicineViewModel::class.java)
-        */
-        activity?.let {
-            viewModel=ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(it.application))
-                .get(BoxDisplayViewModel::class.java)
-        }
 
         viewModel.allMedicines.observe(viewLifecycleOwner, Observer {list->
             list?.let{
@@ -70,6 +40,19 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
             }
 
         })
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = view.findViewById(R.id.med_rv)
+        initRecycleView()
+
+        activity?.let {
+            viewModel=ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(it.application))
+                .get(BoxDisplayViewModel::class.java)
+        }
 
         navController = Navigation.findNavController(view)
         val generateQrBtn : ExtendedFloatingActionButton = view.findViewById(R.id.qr_button)
@@ -81,10 +64,17 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         addMedBtn.setOnClickListener {
             navController.navigate(R.id.action_boxDisplayFragment_to_addMedicineFragment)
         }
-
     }
 
     override fun onExpandClicked() {
 
+    }
+
+    private fun initRecycleView(){
+        recyclerView.setHasFixedSize(true)
+        adapter = MedicineRvAdapter(requireContext(), this)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 }

@@ -7,8 +7,8 @@ import androidx.room.*
 interface MedicineDao {
 
     //handle conflicts like if medicine already exists, if doesn't exist, if exist but at different price??? what to do?
-//    @OnConflictStrategy(insert())
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(medicine: Medicine)
 
     @Delete

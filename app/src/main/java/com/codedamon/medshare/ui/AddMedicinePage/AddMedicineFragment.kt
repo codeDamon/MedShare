@@ -11,15 +11,15 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.codedamon.medshare.R
 import com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayViewModel
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 import com.codedamon.medshare.model.Medicine
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDate.parse
-import java.time.format.DateTimeFormatter
+
 
 
 /**                       We can use DATA BINDING
@@ -33,7 +33,7 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
         fun newInstance() = AddMedicineFragment()
     }
 
-
+    private lateinit var navController: NavController
     private lateinit var viewModel: AddMedicineViewModel
     private lateinit var calenderIcon : ImageView
     private lateinit var expiry: TextInputLayout
@@ -77,7 +77,7 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
                 ViewModelProvider.AndroidViewModelFactory.getInstance(it.application))
                 .get(AddMedicineViewModel::class.java)
         }
-
+        navController = Navigation.findNavController(view)
 
         val addMedBtn: Button = view.findViewById(R.id.addMedBtn)
         addMedBtn.setOnClickListener {
@@ -107,9 +107,12 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
             if(validateMedInfo()){
                 val medicine = Medicine(
                     name.editText?.text.toString(),price.editText?.text.toString().toDouble(),quantity.editText?.text.toString().toInt(),
-                    parse(expiry.editText?.text.toString())
+                    expiry.editText?.text.toString()
                 )
                 viewModel.addMedicine(medicine)
+//                view : View ->
+                navController.navigate(R.id.action_addMedicineFragment_to_boxDisplayFragment)
+
             }else{
                 Toast.makeText(context,"Message",Toast.LENGTH_SHORT).show()
             }
