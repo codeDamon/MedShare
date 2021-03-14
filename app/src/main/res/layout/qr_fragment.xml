@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan this qr for rewards"
+        android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/qr"
         app:layout_constraintStart_toStartOf="@id/qr"
         app:layout_constraintEnd_toEndOf="@id/qr"/>

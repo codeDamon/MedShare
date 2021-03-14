@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedShare">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.SignInActivity" />
+        <activity android:name=".ui.DashboardActivity" />
+        <activity
+            android:name=".ui.SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

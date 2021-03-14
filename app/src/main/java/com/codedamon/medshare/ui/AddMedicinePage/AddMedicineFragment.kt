@@ -1,10 +1,13 @@
 package com.codedamon.medshare.ui.AddMedicinePage
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -107,8 +110,12 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
                 navController.navigate(R.id.action_addMedicineFragment_to_boxDisplayFragment)
 
             }else{
-                Toast.makeText(context,"Message",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Please Fill the entries!!",Toast.LENGTH_LONG).show()
             }
+
+            // Hide the keyboard.
+            val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
         }
 

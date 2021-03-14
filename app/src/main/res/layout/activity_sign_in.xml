@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context=".ui.SignInActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
 
             <com.google.android.gms.common.SignInButton
 
-                android:id="@+id/google_sign_in"
+                android:id="@+id/sign_in_btn"
                 android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 android:layout_margin="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/google_sign_in">
+                app:layout_constraintTop_toBottomOf="@id/sign_in_btn">
 
                 <View
                     android:layout_width="0dp"
@@ -170,17 +170,17 @@
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/password_et" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/sign_up_link"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/sign_up_link"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
 
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="New User? Register now"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/btn_login" />-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:text="New User? Register now"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/btn_login" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
