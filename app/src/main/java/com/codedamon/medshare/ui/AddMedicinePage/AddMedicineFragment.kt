@@ -95,7 +95,7 @@ class AddMedicineFragment : Fragment() {
                 Toast.makeText(this,"Message",Toast.LENGTH_SHORT).show()
             }
             val medicine = Medicine(
-                name.text,price.text.toDouble(),quantity.text.toInt(),expiry.text
+                name.text.toString(),price.text.toString().toDouble(),quantity.text.toString().toInt(),LocalDate.parse(expiry.text.toString())
             )
 
             /** *************************************************/
@@ -116,7 +116,7 @@ class AddMedicineFragment : Fragment() {
                                 view: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
 
             expiry.editText.let {
-                it?.setText("$dayOfMonth/${month+1}/$year")
+                it?.setText("$year/${month+1}/$dayOfMonth")
             }
 
         }, year, month, dayOfMonth)
