@@ -32,13 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
-    }
-    dataBinding {
-        enabled = true
-    }
 
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -49,10 +46,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
 
-
-
-
-
     //firebase
     implementation 'com.google.firebase:firebase-auth:20.0.3'
     // Import the BoM for the Firebase platform
@@ -62,13 +55,13 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
     //qr code generator
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.4.1'
-
 
     //room db
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
@@ -103,6 +96,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
-
 
 }

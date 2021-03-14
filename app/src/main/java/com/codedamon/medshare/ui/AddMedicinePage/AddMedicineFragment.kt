@@ -1,21 +1,14 @@
 package com.codedamon.medshare.ui.AddMedicinePage
-
 import android.app.DatePickerDialog
-import android.app.Fragment
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayViewModel
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 import com.codedamon.medshare.model.Medicine

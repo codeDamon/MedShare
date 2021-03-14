@@ -7,12 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.model.Medicine
-
-
 
 class MedicineRvAdapter(
     val context: Context, private val mInterface: MedBoxInterface)
@@ -26,8 +23,6 @@ class MedicineRvAdapter(
 
 
     inner class MedBoxViewHolder(view: View) : RecyclerView.ViewHolder(view){
-
-
 
         val detailsLayout : LinearLayout = view.findViewById(R.id.details_layout)
         val downArrow: ImageView = view.findViewById(R.id.down_arrow)
