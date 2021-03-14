@@ -7,8 +7,8 @@ import com.codedamon.medshare.model.Medicine
 import com.codedamon.medshare.model.MedicineDao
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = arrayOf(Medicine::class), version = 1, exportSchema = false)
-public abstract class MedShareDatabase : RoomDatabase() {
+@Database(entities = [Medicine::class], version = 1, exportSchema = false)
+abstract class MedShareDatabase : RoomDatabase() {
 
     abstract fun getMedicineDao(): MedicineDao
 

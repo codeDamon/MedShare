@@ -7,30 +7,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.model.Medicine
 
-
-
 class MedicineRvAdapter(
-    val context: Context,
-    private val list: ArrayList<Medicine>,
-    private val mInterface: MedBoxInterface
-)
+    val context: Context, private val mInterface: MedBoxInterface)
     : RecyclerView.Adapter<MedicineRvAdapter.MedBoxViewHolder>(){
 
+    private val allMedicine = ArrayList<Medicine>()
 
     interface MedBoxInterface{
         fun onExpandClicked();
     }
 
-    val allMedicine = ArrayList<Medicine>()
-
     inner class MedBoxViewHolder(view: View) : RecyclerView.ViewHolder(view){
-
-
 
         val detailsLayout : LinearLayout = view.findViewById(R.id.details_layout)
         val downArrow: ImageView = view.findViewById(R.id.down_arrow)
@@ -47,7 +38,7 @@ class MedicineRvAdapter(
         return MedBoxViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = allMedicine.size
 
     override fun onBindViewHolder(holder: MedBoxViewHolder, position: Int) {
         val currentMedicine = allMedicine[position]

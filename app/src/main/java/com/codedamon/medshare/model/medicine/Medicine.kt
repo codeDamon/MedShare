@@ -11,7 +11,6 @@ import java.time.LocalDate
 class Medicine(val name: String,
                val price: Double,
                val quantity: Int,
-               val expiryDate: LocalDate
-               ) {
+               val expiryDate: String) {
     @PrimaryKey(autoGenerate = true)var id:Int=0
 }

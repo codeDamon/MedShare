@@ -1,12 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
-
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-
 
 android {
     compileSdkVersion 30
@@ -35,13 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
-    }
-    dataBinding {
-        enabled = true
-    }
 
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -52,18 +46,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
 
-
-
-
-
     //firebase
     implementation platform('com.google.firebase:firebase-bom:26.7.0')
-
 
     //qr code generator
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.4.1'
-
 
     //room db
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
@@ -98,6 +86,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
-
 
 }
