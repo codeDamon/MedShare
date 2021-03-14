@@ -3,10 +3,8 @@ package com.codedamon.medshare.ui.boxDisplayPage
 import android.app.Application
 import androidx.lifecycle.*
 import com.codedamon.medshare.model.Medicine
-import com.codedamon.medshare.model.MedicineDatabase
+import com.codedamon.medshare.model.medicine.MedShareDatabase
 import com.codedamon.medshare.model.MedicineRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class BoxDisplayViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,7 +15,7 @@ class BoxDisplayViewModel(application: Application) : AndroidViewModel(applicati
     val allMedicines: LiveData<List<Medicine>>
     private val repository:MedicineRepository
     init {
-        val dao = MedicineDatabase.getDatabase(application).getMedicineDao()
+        val dao = MedShareDatabase.getDatabase(application).getMedicineDao()
         repository = MedicineRepository(dao)
         allMedicines = repository.allMedicines
     }

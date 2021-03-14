@@ -1,13 +1,15 @@
 package com.codedamon.medshare.ui.AddMedicinePage
 
 import android.app.DatePickerDialog
+import android.app.Fragment
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.codedamon.medshare.R
 import com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayViewModel
@@ -16,6 +18,7 @@ import java.util.*
 import com.codedamon.medshare.model.Medicine
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDate.parse
 import java.time.format.DateTimeFormatter
 
 
@@ -24,7 +27,7 @@ import java.time.format.DateTimeFormatter
 import androidx.databinding.DataBindingUtil
 import com.codedamon.medshare.databinding.FragmentAddMedicineBinding
 */
-class AddMedicineFragment : Fragment() {
+class AddMedicineFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = AddMedicineFragment()
@@ -34,9 +37,9 @@ class AddMedicineFragment : Fragment() {
     private lateinit var viewModel: AddMedicineViewModel
     private lateinit var calenderIcon : ImageView
     private lateinit var expiry: TextInputLayout
-    private lateinit var name:EditText
-    private lateinit var price:EditText
-    private lateinit var quantity:EditText
+    private lateinit var name:TextInputLayout
+    private lateinit var price:TextInputLayout
+    private lateinit var quantity:TextInputLayout
     /** private lateinit var binding: FragmentAddMedicineBinding
     private val medicineObj: Medicine = Medicine("MedicineXYZ",0.0,0,"1/1/2021")
     */
@@ -51,6 +54,7 @@ class AddMedicineFragment : Fragment() {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -59,9 +63,9 @@ class AddMedicineFragment : Fragment() {
         binding.medicine1=Medicine()
         */
         expiry=view.findViewById(R.id.expiry_date_et)
-        name=view.findViewById(R.id.et_medName)
-        price=view.findViewById(R.id.et_pricePerPiece)
-        quantity=view.findViewById(R.id.et_quantity)
+        name=view.findViewById(R.id.med_name_et)
+        price=view.findViewById(R.id.med_cost_et)
+        quantity=view.findViewById(R.id.med_quantity_et)
 
         calenderIcon = view.findViewById(R.id.calender_icon)
         calenderIcon.setOnClickListener {
@@ -77,29 +81,39 @@ class AddMedicineFragment : Fragment() {
 
         val addMedBtn: Button = view.findViewById(R.id.addMedBtn)
         addMedBtn.setOnClickListener {
-            /** **************************************************/
-            name.text.isEmpty().apply {
+            /** *************************************************
+
+            if(name.editText?.text.toString().trim().length==0) {
+                Toast.makeText(context, "Please fill Medicine Name", Toast.LENGTH_SHORT).show()
+            }
+
+            name.editText?.text.toString().isEmpty().apply {
                 //print toast - error message
             }
-            expiry.text.isEmpty().apply {
+            expiry.editText?.text.toString().isEmpty().apply {
                 //print toast
             }
-            expiry.text.isNotEmpty().apply {
+            expiry.editText?.text.toString().isNotEmpty().apply {
                 //process string to date format
             }
-            price.text.isEmpty().apply {
+            price.editText?.text.toString().isEmpty().apply {
                 //print toast
             }
-            quantity.text.isEmpty().apply {
+            quantity.editText?.text.toString().isEmpty().apply {
                 //print toast
                 Toast.makeText(this,"Message",Toast.LENGTH_SHORT).show()
             }
-            val medicine = Medicine(
-                name.text.toString(),price.text.toString().toDouble(),quantity.text.toString().toInt(),LocalDate.parse(expiry.text.toString())
-            )
+            */
+            if(validateMedInfo()){
+                val medicine = Medicine(
+                    name.editText?.text.toString(),price.editText?.text.toString().toDouble(),quantity.editText?.text.toString().toInt(),
+                    parse(expiry.editText?.text.toString())
+                )
+                viewModel.addMedicine(medicine)
+            }else{
+                Toast.makeText(context,"Message",Toast.LENGTH_SHORT).show()
+            }
 
-            /** *************************************************/
-            viewModel.addMedicine(medicine)
         }
 
 
@@ -121,6 +135,11 @@ class AddMedicineFragment : Fragment() {
 
         }, year, month, dayOfMonth)
         datePicker.show()
+    }
+
+    private fun validateMedInfo():Boolean{
+        return !(name.editText?.text.toString().isNullOrEmpty() || expiry.editText?.text.toString().isNullOrEmpty()
+                || price.editText?.text.toString().isNullOrEmpty() || quantity.editText?.text.toString().isNullOrEmpty())
     }
 
 }
