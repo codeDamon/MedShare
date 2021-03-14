@@ -18,8 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="40dp"
 
-        android:text="Medicine List"
-        android:textSize="18sp"
+        android:text="@string/medicine_list"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
 
@@ -38,11 +38,9 @@
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:id="@+id/qr_button"
-        android:text="Generate QR"
+        android:text="@string/generate_qr"
         app:icon="@drawable/ic_qr_code_24"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"/>
@@ -51,8 +49,7 @@
         android:id="@+id/add_med_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="Add med page"
+        android:text="@string/add_med_page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

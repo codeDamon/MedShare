@@ -16,9 +16,9 @@
             android:id="@+id/med_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medicine Name"
+            android:text="@string/medicine_name"
             android:textSize="18sp"
-
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,8 +27,8 @@
             android:id="@+id/earn_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="Earn 2 X "
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:text="@string/earn_2_x"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Expiry date"
+                    android:text="@string/expiry_date"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/tv_perMedCost"
                     android:layout_marginStart="10dp"
                     android:text="01"
                     android:textSize="12sp"
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:id="@+id/tv_quantity"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:text="01"
