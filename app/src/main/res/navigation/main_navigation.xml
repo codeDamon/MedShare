@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/homeFragment">
-
+<!--
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.codedamon.medshare.ui.LoginPage.LoginFragment"
@@ -23,6 +23,7 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+   -->
     <fragment
         android:id="@+id/addMedicineFragment"
         android:name="com.codedamon.medshare.ui.AddMedicinePage.AddMedicineFragment"
@@ -37,9 +38,9 @@
         android:name="com.codedamon.medshare.ui.HomePage.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_loginFragment"-->
+<!--            app:destination="@id/loginFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
@@ -63,4 +64,19 @@
         android:name="com.codedamon.medshare.ui.profilePage.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.codedamon.medshare.ui.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="com.codedamon.medshare.ui.SignInActivity"
+        android:label="activity_sign_up"
+        tools:layout="@layout/activity_sign_in" />
+    <activity
+        android:id="@+id/splashScreenActivity"
+        android:name="com.codedamon.medshare.ui.SplashScreenActivity"
+        android:label="activity_splashscreen"
+        tools:layout="@layout/activity_splashscreen" />
 </navigation>
