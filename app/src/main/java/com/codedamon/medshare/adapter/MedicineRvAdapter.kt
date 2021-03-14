@@ -21,6 +21,7 @@ class MedicineRvAdapter(
         fun onExpandClicked();
     }
 
+
     inner class MedBoxViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
         val detailsLayout : LinearLayout = view.findViewById(R.id.details_layout)

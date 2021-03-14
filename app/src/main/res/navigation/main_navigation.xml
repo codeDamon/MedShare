@@ -27,7 +27,11 @@
         android:id="@+id/addMedicineFragment"
         android:name="com.codedamon.medshare.ui.AddMedicinePage.AddMedicineFragment"
         android:label="add_medicine_fragment"
-        tools:layout="@layout/add_medicine_fragment" />
+        tools:layout="@layout/add_medicine_fragment" >
+        <action
+            android:id="@+id/action_addMedicineFragment_to_boxDisplayFragment"
+            app:destination="@id/boxDisplayFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.codedamon.medshare.ui.HomePage.HomeFragment"
