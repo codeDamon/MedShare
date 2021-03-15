@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.RadioGroup
 import com.codedamon.medshare.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -20,14 +22,36 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private lateinit var mAuth: FirebaseAuth
-    lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
+        configureGoogleSignIn()
+        findViewById<SignInButton>(R.id.google_sign_in_btn).setOnClickListener {
+            signInUsingGoogle()
+        }
 
-// Configure Google Sign In
+        findViewById<Button>(R.id.sign_in_button).setOnClickListener {
+            signInUsingEmail()
+        }
+    }
+
+    private fun signInUsingEmail(){
+        val intent=Intent(this,DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun isDonorSignIn():Boolean{
+        if(findViewById<RadioGroup>(R.id.radio_group).checkedRadioButtonId == R.id.rad_donor)
+            return true
+        return false
+    }
+
+    private fun configureGoogleSignIn(){
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -37,14 +61,9 @@ class SignInActivity : AppCompatActivity() {
 
         //Firebase Auth Instance
         mAuth = FirebaseAuth.getInstance()
-
-        findViewById<SignInButton>(R.id.sign_in_btn).setOnClickListener {
-            signIn()
-        }
-
     }
 
-    private fun signIn() {
+    private fun signInUsingGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }

@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var navController: NavController
     private lateinit var mAuth:FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +60,11 @@ class HomeFragment : Fragment() {
             val intent=Intent(context,SignInActivity::class.java)
             startActivity(intent)
             activity?.finish()
+        }
+
+
+        view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_homeChemistFragment)
         }
     }
 }

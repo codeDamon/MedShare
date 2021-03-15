@@ -1,13 +1,14 @@
 package com.codedamon.medshare.ui.boxDisplayPage
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,11 @@ import com.codedamon.medshare.R
 import com.codedamon.medshare.adapter.MedicineRvAdapter
 import com.codedamon.medshare.model.Medicine
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+
 
 class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
 
@@ -24,8 +30,10 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
     private lateinit var navController: NavController
     private lateinit var adapter : MedicineRvAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.box_display_fragment, container, false)
     }
@@ -34,8 +42,8 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(BoxDisplayViewModel::class.java)
 
-        viewModel.allMedicines.observe(viewLifecycleOwner, Observer {list->
-            list?.let{
+        viewModel.allMedicines.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
                 adapter.updateList(it)
             }
 
@@ -49,14 +57,17 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         initRecycleView()
 
         activity?.let {
-            viewModel=ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(it.application))
+            viewModel=ViewModelProvider(
+                this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(it.application)
+            )
                 .get(BoxDisplayViewModel::class.java)
         }
 
         navController = Navigation.findNavController(view)
         val generateQrBtn : ExtendedFloatingActionButton = view.findViewById(R.id.qr_button)
         generateQrBtn.setOnClickListener {
+            parseListToString()
             navController.navigate(R.id.action_boxDisplayFragment_to_qrPageFragment)
         }
 
@@ -64,10 +75,38 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         addMedBtn.setOnClickListener {
             navController.navigate(R.id.action_boxDisplayFragment_to_addMedicineFragment)
         }
+
+
     }
 
     override fun onExpandClicked() {
 
+    }
+
+    private fun parseListToString(){
+
+        val jsonArray: JsonArray = JsonArray()
+        for (i in viewModel.allMedicines.value!!){
+            val gson = Gson()
+            val json : String = gson.toJson(i)
+            jsonArray.add(json)
+        }
+        val gson = Gson()
+        val json = gson.toJson(jsonArray)
+        Log.d("Parse", json)
+
+        extractStringToJson(json)
+    }
+
+    private fun extractStringToJson(s: String){
+
+        val convertedJsonArray: JsonArray = Gson().fromJson(s, JsonArray::class.java)
+
+        for(jsonObject in convertedJsonArray){
+            val obj = jsonObject.asString
+            val convertedObject: Medicine = Gson().fromJson(obj, Medicine::class.java)
+            Log.d("Parse",convertedObject.name)
+        }
     }
 
     private fun initRecycleView(){

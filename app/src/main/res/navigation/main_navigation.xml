@@ -38,9 +38,9 @@
         android:name="com.codedamon.medshare.ui.HomePage.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_loginFragment"-->
-<!--            app:destination="@id/loginFragment" />-->
+        <action
+            android:id="@+id/action_homeFragment_to_homeChemistFragment"
+            app:destination="@id/homeChemistFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
@@ -79,4 +79,18 @@
         android:name="com.codedamon.medshare.ui.SplashScreenActivity"
         android:label="activity_splashscreen"
         tools:layout="@layout/activity_splashscreen" />
+    <fragment
+        android:id="@+id/QRScannerFragment"
+        android:name="com.codedamon.medshare.chemist.ui.QRScannerFragment"
+        android:label="q_r_scanner_fragment"
+        tools:layout="@layout/q_r_scanner_fragment" />
+    <fragment
+        android:id="@+id/homeChemistFragment"
+        android:name="com.codedamon.medshare.chemist.ui.HomePageChemist.HomeChemistFragment"
+        android:label="home_chemist_fragment"
+        tools:layout="@layout/home_chemist_fragment" >
+        <action
+            android:id="@+id/action_homeChemistFragment_to_QRScannerFragment"
+            app:destination="@id/QRScannerFragment" />
+    </fragment>
 </navigation>
