@@ -41,7 +41,7 @@ class SplashScreenActivity : AppCompatActivity() {
          *  else send him to dashboardActivity*/
         Handler().postDelayed({
             if(user!=null){
-                val dashboardIntent=Intent(this,HomeFragment::class.java)
+                val dashboardIntent=Intent(this,DashboardActivity::class.java)
                 startActivity(dashboardIntent)
                 finish()
             }else{

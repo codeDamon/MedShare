@@ -48,19 +48,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mAuth= FirebaseAuth.getInstance()
-        val currentUser=mAuth.currentUser
-        /* user details obtained from google sign in can be used
-        currentUser?.uid
-        currentUser?.displayName
-        currentUser?.email
-        Glide.with(this)
-            .load(currentUser?.photoUrl)
-            .placeholder(R.drawable.ic_round_cloud_download_24)
-            .error(R.drawable.ic_round_broken_image_24)
-            .fallback(R.drawable.ic_round_image_24)
-            .centerCrop()
-            .into(imageViewID)
-        */
+
 
         navController = Navigation.findNavController(view)
 

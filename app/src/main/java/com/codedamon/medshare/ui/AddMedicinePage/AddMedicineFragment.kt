@@ -36,9 +36,6 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
     private lateinit var name:TextInputLayout
     private lateinit var price:TextInputLayout
     private lateinit var quantity:TextInputLayout
-    /** private lateinit var binding: FragmentAddMedicineBinding
-    private val medicineObj: Medicine = Medicine("MedicineXYZ",0.0,0,"1/1/2021")
-    */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_medicine_fragment, container, false)
@@ -77,29 +74,6 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
 
         val addMedBtn: Button = view.findViewById(R.id.addMedBtn)
         addMedBtn.setOnClickListener {
-            /** *************************************************
-
-            if(name.editText?.text.toString().trim().length==0) {
-                Toast.makeText(context, "Please fill Medicine Name", Toast.LENGTH_SHORT).show()
-            }
-
-            name.editText?.text.toString().isEmpty().apply {
-                //print toast - error message
-            }
-            expiry.editText?.text.toString().isEmpty().apply {
-                //print toast
-            }
-            expiry.editText?.text.toString().isNotEmpty().apply {
-                //process string to date format
-            }
-            price.editText?.text.toString().isEmpty().apply {
-                //print toast
-            }
-            quantity.editText?.text.toString().isEmpty().apply {
-                //print toast
-                Toast.makeText(this,"Message",Toast.LENGTH_SHORT).show()
-            }
-            */
             if(validateMedInfo()){
                 val medicine = Medicine(
                     name.editText?.text.toString(),price.editText?.text.toString().toDouble(),quantity.editText?.text.toString().toInt(),
