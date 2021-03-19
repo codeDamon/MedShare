@@ -1,11 +1,11 @@
-package com.codedamon.medshare.ui.AddMedicinePage
+package com.codedamon.medshare.donor.ui.addMedicinePage
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.codedamon.medshare.model.Medicine
-import com.codedamon.medshare.model.medicine.MedShareDatabase
+import com.codedamon.medshare.model.medicine.Medicine
+import com.codedamon.medshare.donor.db.MedShareDatabase
 import com.codedamon.medshare.model.MedicineRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

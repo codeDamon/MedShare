@@ -2,6 +2,7 @@ package com.codedamon.medshare.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.codedamon.medshare.model.medicine.Medicine
 
 @Dao
 interface MedicineDao {

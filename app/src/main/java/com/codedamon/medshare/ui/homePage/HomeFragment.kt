@@ -1,25 +1,18 @@
-package com.codedamon.medshare.ui.HomePage
+package com.codedamon.medshare.ui.homePage
 
-import android.R.attr.bitmap
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import androidmads.library.qrgenearator.QRGContents
-import androidmads.library.qrgenearator.QRGEncoder
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.SignInActivity
+import com.codedamon.medshare.ui.loginSignUpPages.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.zxing.WriterException
 
 
 class HomeFragment : Fragment() {
@@ -57,7 +50,7 @@ class HomeFragment : Fragment() {
         logoutFragBtn.setOnClickListener {
 //            navController.navigate(R.id.action_homeFragment_to_loginFragment)
             mAuth.signOut()
-            val intent=Intent(context,SignInActivity::class.java)
+            val intent=Intent(context, SignInActivity::class.java)
             startActivity(intent)
             activity?.finish()
         }

@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui
+package com.codedamon.medshare.ui.loginSignUpPages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.codedamon.medshare.R
+import com.codedamon.medshare.ui.DashboardActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -82,7 +83,7 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Account Created",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this,DashboardActivity::class.java)
+                    val intent=Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
                     finish()
                     //updateUI(user)

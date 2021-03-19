@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui.AddMedicinePage
+package com.codedamon.medshare.donor.ui.addMedicinePage
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 import com.codedamon.medshare.R
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
-import com.codedamon.medshare.model.Medicine
+import com.codedamon.medshare.model.medicine.Medicine
 import java.text.ParseException
 import java.text.SimpleDateFormat
 

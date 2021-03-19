@@ -7,7 +7,7 @@ import android.os.Handler
 import android.view.WindowManager
 
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.HomePage.HomeFragment
+import com.codedamon.medshare.ui.loginSignUpPages.SignInActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 
@@ -46,7 +46,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 finish()
             }else{
                 //signup fragment hai
-                val signInIntent=Intent(this,SignInActivity::class.java)
+                val signInIntent=Intent(this, SignInActivity::class.java)
                 startActivity(signInIntent)
                 finish()
             }

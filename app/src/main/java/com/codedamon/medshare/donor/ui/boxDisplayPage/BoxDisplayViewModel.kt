@@ -1,9 +1,9 @@
-package com.codedamon.medshare.ui.boxDisplayPage
+package com.codedamon.medshare.donor.ui.boxDisplayPage
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.codedamon.medshare.model.Medicine
-import com.codedamon.medshare.model.medicine.MedShareDatabase
+import com.codedamon.medshare.model.medicine.Medicine
+import com.codedamon.medshare.donor.db.MedShareDatabase
 import com.codedamon.medshare.model.MedicineRepository
 
 class BoxDisplayViewModel(application: Application) : AndroidViewModel(application) {

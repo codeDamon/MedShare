@@ -1,9 +1,9 @@
-package com.codedamon.medshare.model.medicine
+package com.codedamon.medshare.donor.db
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.codedamon.medshare.model.Medicine
+import com.codedamon.medshare.model.medicine.Medicine
 import com.codedamon.medshare.model.MedicineDao
 
 // Annotates class to be a Room Database with a table (entity) of the Word class

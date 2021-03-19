@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayViewModel
+import com.codedamon.medshare.donor.ui.boxDisplayPage.BoxDisplayViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 

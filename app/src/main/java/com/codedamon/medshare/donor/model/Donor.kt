@@ -1,4 +1,4 @@
-package com.codedamon.medshare.model.auth.donor
+package com.codedamon.medshare.donor.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

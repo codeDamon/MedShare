@@ -1,4 +1,4 @@
-package com.codedamon.medshare.chemist.ui.HomePageChemist
+package com.codedamon.medshare.chemist.ui.homePageChemist
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui.QrPage
+package com.codedamon.medshare.donor.ui.qrPage
 
 import android.graphics.Color
 import android.os.Bundle

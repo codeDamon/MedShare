@@ -1,4 +1,4 @@
-package com.codedamon.medshare.adapter
+package com.codedamon.medshare.donor.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
-import com.codedamon.medshare.model.Medicine
+import com.codedamon.medshare.model.medicine.Medicine
 
 class MedicineRvAdapter(
     val context: Context, private val mInterface: MedBoxInterface)

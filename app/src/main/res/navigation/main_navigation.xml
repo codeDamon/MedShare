@@ -26,7 +26,7 @@
    -->
     <fragment
         android:id="@+id/addMedicineFragment"
-        android:name="com.codedamon.medshare.ui.AddMedicinePage.AddMedicineFragment"
+        android:name="com.codedamon.medshare.donor.ui.addMedicinePage.AddMedicineFragment"
         android:label="add_medicine_fragment"
         tools:layout="@layout/add_medicine_fragment" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.codedamon.medshare.ui.HomePage.HomeFragment"
+        android:name="com.codedamon.medshare.ui.homePage.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
-        android:name="com.codedamon.medshare.ui.boxDisplayPage.BoxDisplayFragment"
+        android:name="com.codedamon.medshare.donor.ui.boxDisplayPage.BoxDisplayFragment"
         android:label="box_display_fragment"
         tools:layout="@layout/box_display_fragment" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrPageFragment"
-        android:name="com.codedamon.medshare.ui.QrPage.QrPageFragment"
+        android:name="com.codedamon.medshare.donor.ui.qrPage.QrPageFragment"
         android:label="qr_fragment"
         tools:layout="@layout/qr_fragment" />
     <fragment
@@ -71,7 +71,7 @@
         tools:layout="@layout/activity_login" />
     <activity
         android:id="@+id/signUpActivity"
-        android:name="com.codedamon.medshare.ui.SignInActivity"
+        android:name="com.codedamon.medshare.ui.loginSignUpPages.SignInActivity"
         android:label="activity_sign_up"
         tools:layout="@layout/activity_sign_in" />
     <activity
@@ -86,7 +86,7 @@
         tools:layout="@layout/q_r_scanner_fragment" />
     <fragment
         android:id="@+id/homeChemistFragment"
-        android:name="com.codedamon.medshare.chemist.ui.HomePageChemist.HomeChemistFragment"
+        android:name="com.codedamon.medshare.chemist.ui.homePageChemist.HomeChemistFragment"
         android:label="home_chemist_fragment"
         tools:layout="@layout/home_chemist_fragment" >
         <action

@@ -1,11 +1,9 @@
 package com.codedamon.medshare.model.auth.donor
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.Query
-import com.codedamon.medshare.model.Medicine
+import com.codedamon.medshare.donor.model.Donor
 
 
 @Dao

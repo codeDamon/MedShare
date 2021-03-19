@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui
+package com.codedamon.medshare.ui.loginSignUpPages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.codedamon.medshare.R
+import com.codedamon.medshare.ui.DashboardActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -37,7 +38,7 @@ class SignInActivity : AppCompatActivity() {
         email = findViewById(R.id.email_et)
         password = findViewById(R.id.password_et)
         findViewById<TextView>(R.id.sign_up_link).setOnClickListener {
-            val intent=Intent(this,SignUpActivity::class.java)
+            val intent=Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
@@ -71,7 +72,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Welcome to MedShare",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this,DashboardActivity::class.java)
+                    val intent=Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
                     finish()
 
@@ -159,7 +160,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Welcome to MedShare",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this,DashboardActivity::class.java)
+                    val intent=Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

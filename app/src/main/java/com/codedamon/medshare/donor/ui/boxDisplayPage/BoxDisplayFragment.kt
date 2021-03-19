@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui.boxDisplayPage
+package com.codedamon.medshare.donor.ui.boxDisplayPage
 
 import android.os.Bundle
 import android.util.Log
@@ -14,13 +14,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
-import com.codedamon.medshare.adapter.MedicineRvAdapter
-import com.codedamon.medshare.model.Medicine
+import com.codedamon.medshare.donor.adapter.MedicineRvAdapter
+import com.codedamon.medshare.model.medicine.Medicine
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 
 
 class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {

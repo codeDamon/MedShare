@@ -1,4 +1,4 @@
-package com.codedamon.medshare.ui.HomePage
+package com.codedamon.medshare.ui.homePage
 
 import androidx.lifecycle.ViewModel
 
