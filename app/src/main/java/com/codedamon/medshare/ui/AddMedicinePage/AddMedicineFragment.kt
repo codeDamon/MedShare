@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,7 +14,8 @@ import com.codedamon.medshare.R
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 import com.codedamon.medshare.model.Medicine
-
+import java.text.ParseException
+import java.text.SimpleDateFormat
 
 
 /**                       We can use DATA BINDING
@@ -83,8 +83,6 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
 //                view : View ->
                 navController.navigate(R.id.action_addMedicineFragment_to_boxDisplayFragment)
 
-            }else{
-                Toast.makeText(context,"Please Fill the entries!!",Toast.LENGTH_LONG).show()
             }
 
             // Hide the keyboard.
@@ -92,9 +90,6 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
         }
-
-
-
     }
 
     private fun calenderPickerPrompt(){
@@ -115,8 +110,53 @@ class AddMedicineFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun validateMedInfo():Boolean{
-        return !(name.editText?.text.toString().isNullOrEmpty() || expiry.editText?.text.toString().isNullOrEmpty()
-                || price.editText?.text.toString().isNullOrEmpty() || quantity.editText?.text.toString().isNullOrEmpty())
+
+        name.error= null
+        expiry.error = null
+        price.error = null
+        quantity.error = null
+
+        var valid = true
+
+        if(name.editText?.text.toString().isEmpty()){
+            name.error = "Can't be empty"
+            valid = false
+        }
+
+        if(expiry.editText?.text.toString().isEmpty()){
+            expiry.error = "Can't be empty"
+            valid = false
+        }else if(!validDate(expiry.editText?.text.toString())){
+            expiry.error = "Invalid date"
+            valid = false
+        }
+
+        if(price.editText?.text.toString().isEmpty()){
+            price.error = "Can't be empty"
+            valid = false
+        } else if(price.editText?.text.toString().toDouble() <= 0){
+            price.error = "Price can't be zero or less"
+            valid = false
+        }
+
+        if(quantity.editText?.text.toString().isEmpty()){
+            quantity.error = "Can't be empty"
+            valid = false
+        } else if(quantity.editText?.text.toString().toLong() <= 0){
+            quantity.error = "Quantity can't be zero or less"
+            valid = false
+        }
+        return valid
     }
 
+    private fun validDate(date: String): Boolean{
+        val dateFormat = "yyyy/mm/dd"
+        val simpleDateFormat = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+        return try {
+            simpleDateFormat.parse(date)
+            true
+        }catch (e:ParseException){
+            false
+        }
+    }
 }
