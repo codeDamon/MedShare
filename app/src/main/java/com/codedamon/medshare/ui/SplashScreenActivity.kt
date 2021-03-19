@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 @Suppress("DEPRECATION")
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT:Long=3000 // 3 sec
+    private val SPLASH_TIME_OUT:Long=1000 // 3 sec
 
 //    lateinit var viewModel: BoxDisplayViewModel
 //    private lateinit var bottomNavigationView: BottomNavigationView
