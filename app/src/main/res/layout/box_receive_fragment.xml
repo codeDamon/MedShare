@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".chemist.ui.BoxReceivePage.BoxReceiveFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:id="@+id/box_receive_rv"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_box_receive"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_baseline_check_24"
+        android:tint="@android:color/white"/>
+
+
+
+
+</RelativeLayout>

@@ -58,17 +58,19 @@
         android:id="@+id/qrPageFragment"
         android:name="com.codedamon.medshare.donor.ui.qrPage.QrPageFragment"
         android:label="qr_fragment"
-        tools:layout="@layout/qr_fragment" />
+        tools:layout="@layout/qr_fragment" >
+        <argument
+            android:name="medicines_list"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.codedamon.medshare.ui.profilePage.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.codedamon.medshare.ui.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
+
     <activity
         android:id="@+id/signUpActivity"
         android:name="com.codedamon.medshare.ui.loginSignUpPages.SignInActivity"
@@ -83,7 +85,11 @@
         android:id="@+id/QRScannerFragment"
         android:name="com.codedamon.medshare.chemist.ui.QRScannerFragment"
         android:label="q_r_scanner_fragment"
-        tools:layout="@layout/q_r_scanner_fragment" />
+        tools:layout="@layout/q_r_scanner_fragment" >
+        <action
+            android:id="@+id/action_QRScannerFragment_to_boxReceiveFragment"
+            app:destination="@id/boxReceiveFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeChemistFragment"
         android:name="com.codedamon.medshare.chemist.ui.homePageChemist.HomeChemistFragment"
@@ -92,5 +98,16 @@
         <action
             android:id="@+id/action_homeChemistFragment_to_QRScannerFragment"
             app:destination="@id/QRScannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxReceiveFragment"
+        android:name="com.codedamon.medshare.chemist.ui.BoxReceivePage.BoxReceiveFragment"
+        android:label="box_receive_fragment"
+        tools:layout="@layout/box_receive_fragment" >
+        <argument
+            android:name="list"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

@@ -65,8 +65,10 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         navController = Navigation.findNavController(view)
         val generateQrBtn : ExtendedFloatingActionButton = view.findViewById(R.id.qr_button)
         generateQrBtn.setOnClickListener {
-            parseListToString()
-            navController.navigate(R.id.action_boxDisplayFragment_to_qrPageFragment)
+
+            val action = BoxDisplayFragmentDirections.actionBoxDisplayFragmentToQrPageFragment(parseListToString())
+            navController.navigate(action)
+            //navController.navigate(R.id.action_boxDisplayFragment_to_qrPageFragment)
         }
 
         val addMedBtn: Button = view.findViewById(R.id.add_med_button)
@@ -75,36 +77,28 @@ class BoxDisplayFragment : Fragment(), MedicineRvAdapter.MedBoxInterface {
         }
 
 
+
     }
 
     override fun onExpandClicked() {
 
     }
 
-    private fun parseListToString(){
+    private fun parseListToString(): String{
 
-        val jsonArray: JsonArray = JsonArray()
+        val jsonArray = JsonArray()
         for (i in viewModel.allMedicines.value!!){
             val gson = Gson()
             val json : String = gson.toJson(i)
             jsonArray.add(json)
         }
         val gson = Gson()
-        val json = gson.toJson(jsonArray)
+        val json :String = gson.toJson(jsonArray)
+
+
         Log.d("Parse", json)
+        return json
 
-        extractStringToJson(json)
-    }
-
-    private fun extractStringToJson(s: String){
-
-        val convertedJsonArray: JsonArray = Gson().fromJson(s, JsonArray::class.java)
-
-        for(jsonObject in convertedJsonArray){
-            val obj = jsonObject.asString
-            val convertedObject: Medicine = Gson().fromJson(obj, Medicine::class.java)
-            Log.d("Parse",convertedObject.name)
-        }
     }
 
     private fun initRecycleView(){

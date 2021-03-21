@@ -10,10 +10,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.navigation.fragment.navArgs
 import com.codedamon.medshare.R
+import com.codedamon.medshare.chemist.ui.BoxReceivePage.BoxReceiveFragmentArgs
 import com.google.zxing.WriterException
 
 class QrPageFragment : Fragment() {
+
+    val args: QrPageFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +34,16 @@ class QrPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var medStr : String? = ""
+        medStr = args.medicinesList
+
         val qrImg : ImageView = view.findViewById(R.id.qr)
-        val qrgEncoder = QRGEncoder("Hello World", null, QRGContents.Type.TEXT, 1000)
-        qrgEncoder.colorBlack = Color.WHITE
-        qrgEncoder.colorWhite = Color.BLACK
+        val qrgEncoder = medStr?.let {  QRGEncoder(medStr, null, QRGContents.Type.TEXT, 1000)}
+        qrgEncoder?.colorBlack = Color.WHITE
+        qrgEncoder?.colorWhite = Color.BLACK
         try {
             // Getting QR-Code as Bitmap
-            val bitmap = qrgEncoder.bitmap
+            val bitmap = qrgEncoder?.bitmap
             // Setting Bitmap to ImageView
             qrImg.setImageBitmap(bitmap)
         } catch (e: WriterException) {
