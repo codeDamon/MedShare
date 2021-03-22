@@ -18,18 +18,25 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class SignInActivity : AppCompatActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 128
         private const val TAG = "EmailPassword"
+
     }
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var email: TextInputLayout
     private lateinit var password: TextInputLayout
+
+    val db = Firebase.firestore
+
+    private var isDonorAccount : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +56,48 @@ class SignInActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.sign_in_button).setOnClickListener {
             signInUsingEmail()
+        }
+    }
+
+    private fun userSignIn(){
+
+        db.collection("users").document(email.editText?.text.toString())
+            .get()
+            .addOnSuccessListener {
+                if(it!=null){
+                    if(it["type"]!=null){
+                        if(it["type"]=="donor" && isDonorAccount || it["type"]=="chemist" && !isDonorAccount){
+                            signIn(email = email.editText?.text.toString(),
+                                password = password.editText?.text.toString())
+                        }else{
+                            Toast.makeText(applicationContext,
+                                "Incorrect type selected! Switch between donor and chemist",
+                                Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }else{
+                        Toast.makeText(applicationContext,
+                            "No account found! Register Now",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                        Log.d(TAG, "No type field in users collection")
+                    }
+                }else
+                    Log.d(TAG, "No account found")
+            }
+            .addOnFailureListener{
+                Log.d(TAG, "Failed with error $it")
+            }
+    }
+
+    private fun getCurrentUserType(){
+        when(findViewById<RadioGroup>(R.id.radio_group).checkedRadioButtonId){
+            R.id.rad_donor -> {
+                isDonorAccount = true
+            }
+            R.id.rad_chemist -> {
+                isDonorAccount = false
+            }
         }
     }
 
@@ -91,23 +140,19 @@ class SignInActivity : AppCompatActivity() {
 
         if(email.editText?.text.toString().isEmpty()){
             email.error = "Please enter your email-id"
-            return;
+            return
         }
         if(password.editText?.text.toString().isEmpty()){
             password.error = "Please enter password"
-            return;
+            return
         }
+        getCurrentUserType()
 
-        signIn(email = email.editText?.text.toString(),
-            password = password.editText?.text.toString())
+        userSignIn()
 
     }
 
-    private fun isDonorSignIn():Boolean{
-        if(findViewById<RadioGroup>(R.id.radio_group).checkedRadioButtonId == R.id.rad_donor)
-            return true
-        return false
-    }
+
 
     private fun configureGoogleSignIn(){
 

@@ -63,6 +63,9 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+    //firebase firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     //qr code generator
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
     implementation 'com.google.zxing:core:3.4.1'

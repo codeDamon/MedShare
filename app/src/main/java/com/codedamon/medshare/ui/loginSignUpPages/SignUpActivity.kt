@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.codedamon.medshare.R
@@ -12,6 +13,7 @@ import com.codedamon.medshare.ui.DashboardActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var email: TextInputLayout
     private lateinit var password: TextInputLayout
+
+    private val db = Firebase.firestore
 
     companion object {
         private const val TAG = "EmailPassword"
@@ -68,8 +72,15 @@ class SignUpActivity : AppCompatActivity() {
             password.error = "Minimum password length should be 6 characters"
             return;
         }
+
         createAccount(email = email.editText?.text.toString(),
             password = password.editText?.text.toString())
+    }
+
+    private fun isDonorSignIn():Boolean{
+        if(findViewById<RadioGroup>(R.id.radio_group).checkedRadioButtonId == R.id.rad_donor)
+            return true
+        return false
     }
 
     private fun createAccount(email: String, password: String) {
@@ -83,10 +94,27 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Account Created",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this, DashboardActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    //updateUI(user)
+                    val userEnteredValue = hashMapOf<String, String>(
+                        "type" to when(isDonorSignIn()){
+                            true -> "donor"
+                            false -> "chemist"
+                        }
+                    )
+
+                    db.collection("users").document(this.email.editText?.text.toString())
+                        .set(userEnteredValue)
+                        .addOnSuccessListener {
+                            Log.d(TAG, "User Created")
+                            val intent=Intent(this, DashboardActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        .addOnFailureListener {
+                                e -> Log.w(TAG, "Error writing document", e)
+                            Toast.makeText(baseContext, "Something went wrong",
+                                Toast.LENGTH_SHORT).show()
+                        }
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
