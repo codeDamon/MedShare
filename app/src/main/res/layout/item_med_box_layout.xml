@@ -12,6 +12,15 @@
         android:layout_height="wrap_content"
         android:padding="15dp">
 
+        <ImageView
+            android:id="@+id/med_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/pill"/>
+
         <TextView
             android:id="@+id/med_name_tv"
             android:layout_width="wrap_content"
@@ -20,7 +29,8 @@
             android:textSize="18sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@id/med_img"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -29,8 +39,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:text="@string/earn_2_x"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/med_name_tv"
             app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
 
         <ImageView

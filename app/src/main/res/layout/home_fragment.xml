@@ -13,22 +13,12 @@
         android:textSize="36sp"/>
 
     <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign Out"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <Button
         android:id="@+id/chemist_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chemist Home Page"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@id/logout_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

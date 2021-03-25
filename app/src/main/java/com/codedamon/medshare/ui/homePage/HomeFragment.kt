@@ -46,15 +46,6 @@ class HomeFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        val logoutFragBtn : Button = view.findViewById(R.id.logout_button)
-        logoutFragBtn.setOnClickListener {
-//            navController.navigate(R.id.action_homeFragment_to_loginFragment)
-            mAuth.signOut()
-            val intent=Intent(context, SignInActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-        }
-
 
         view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_homeChemistFragment)
