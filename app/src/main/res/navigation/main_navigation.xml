@@ -4,26 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
     app:startDestination="@id/homeFragment">
-<!--
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.codedamon.medshare.ui.LoginPage.LoginFragment"
-        android:label="login_fragment"
-        tools:layout="@layout/login_fragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.codedamon.medshare.ui.SignUpPage.SignUpFragment"
-        android:label="sign_up_fragment"
-        tools:layout="@layout/sign_up_fragment" >
-        <action
-            android:id="@+id/action_signUpFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-   -->
+
     <fragment
         android:id="@+id/addMedicineFragment"
         android:name="com.codedamon.medshare.donor.ui.addMedicinePage.AddMedicineFragment"
@@ -69,7 +50,18 @@
         android:id="@+id/profileFragment"
         android:name="com.codedamon.medshare.ui.profilePage.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_myDonationsFragment"
+            app:destination="@id/myDonationsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_myRewardsFragment"
+            app:destination="@id/myRewardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <activity
         android:id="@+id/signUpActivity"
@@ -109,5 +101,19 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/myDonationsFragment"
+        android:name="com.codedamon.medshare.donor.ui.myDonationsPage.MyDonationsFragment"
+        android:label="fragment_my_donations"
+        tools:layout="@layout/fragment_my_donations" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/myRewardsFragment"
+        android:name="com.codedamon.medshare.donor.ui.myRewardsPage.MyRewardsFragment"
+        android:label="fragment_my_rewards"
+        tools:layout="@layout/fragment_my_rewards">
+
     </fragment>
 </navigation>

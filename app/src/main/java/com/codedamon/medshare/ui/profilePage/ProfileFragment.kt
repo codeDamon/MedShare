@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.codedamon.medshare.R
 import com.codedamon.medshare.ui.loginSignUpPages.SignInActivity
@@ -24,6 +26,9 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     lateinit var profileImg: ImageView
     lateinit var name: TextView
     lateinit var email: TextView
+    private lateinit var navController: NavController
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -43,6 +48,10 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         email = view.findViewById(R.id.tv_Email)
 
         view.findViewById<LinearLayout>(R.id.sign_out_lay).setOnClickListener(this)
+        navController = Navigation.findNavController(view)
+        view.findViewById<LinearLayout>(R.id.my_donations_lay).setOnClickListener(this)
+        view.findViewById<LinearLayout>(R.id.my_rewards_lay).setOnClickListener(this)
+
 
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
@@ -85,6 +94,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         }
                         .show()
                 }
+            }
+
+            R.id.my_donations_lay -> {
+                navController.navigate(R.id.action_profileFragment_to_myDonationsFragment)
+            }
+            R.id.my_rewards_lay -> {
+                navController.navigate(R.id.action_profileFragment_to_myRewardsFragment)
             }
         }
     }
