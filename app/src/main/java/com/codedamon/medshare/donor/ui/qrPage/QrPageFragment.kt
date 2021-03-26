@@ -39,8 +39,8 @@ class QrPageFragment : Fragment() {
 
         val qrImg : ImageView = view.findViewById(R.id.qr)
         val qrgEncoder = medStr?.let {  QRGEncoder(medStr, null, QRGContents.Type.TEXT, 1000)}
-        qrgEncoder?.colorBlack = Color.WHITE
-        qrgEncoder?.colorWhite = Color.BLACK
+        qrgEncoder?.colorBlack = Color.BLACK
+        qrgEncoder?.colorWhite = Color.WHITE
         try {
             // Getting QR-Code as Bitmap
             val bitmap = qrgEncoder?.bitmap
