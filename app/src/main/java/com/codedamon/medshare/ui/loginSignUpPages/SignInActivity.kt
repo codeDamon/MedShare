@@ -9,7 +9,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.DashboardActivity
+import com.codedamon.medshare.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -121,7 +121,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Welcome to MedShare",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this, DashboardActivity::class.java)
+                    val intent=Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
 
@@ -205,7 +205,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Welcome to MedShare",
                         Toast.LENGTH_SHORT).show()
 
-                    val intent=Intent(this, DashboardActivity::class.java)
+                    val intent=Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

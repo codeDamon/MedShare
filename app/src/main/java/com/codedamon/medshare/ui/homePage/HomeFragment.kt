@@ -47,8 +47,11 @@ class HomeFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
 
-        view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
+        /*view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_homeChemistFragment)
-        }
+        }*/
+        /*view.findViewById<Button>(R.id.onBoarding_button).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_onBoardingFragment)
+        }*/
     }
 }

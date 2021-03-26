@@ -9,7 +9,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.codedamon.medshare.R
-import com.codedamon.medshare.ui.DashboardActivity
+import com.codedamon.medshare.ui.MainActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -105,7 +105,7 @@ class SignUpActivity : AppCompatActivity() {
                         .set(userEnteredValue)
                         .addOnSuccessListener {
                             Log.d(TAG, "User Created")
-                            val intent=Intent(this, DashboardActivity::class.java)
+                            val intent=Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         }

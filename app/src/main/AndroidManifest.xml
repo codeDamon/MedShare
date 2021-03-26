@@ -11,15 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedShare">
-        <activity android:name=".ui.loginSignUpPages.SignUpActivity"/>
+        <activity android:name=".ui.loginSignUpPages.SignUpActivity" />
         <activity android:name=".ui.loginSignUpPages.SignInActivity" />
-        <activity android:name=".ui.DashboardActivity" />
-        <activity
-            android:name=".ui.SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

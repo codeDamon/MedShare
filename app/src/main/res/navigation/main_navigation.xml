@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/addMedicineFragment"
@@ -18,11 +18,7 @@
         android:id="@+id/homeFragment"
         android:name="com.codedamon.medshare.ui.homePage.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_homeChemistFragment"
-            app:destination="@id/homeChemistFragment" />
-    </fragment>
+        tools:layout="@layout/home_fragment" />
     <fragment
         android:id="@+id/boxDisplayFragment"
         android:name="com.codedamon.medshare.donor.ui.boxDisplayPage.BoxDisplayFragment"
@@ -63,16 +59,6 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
-    <activity
-        android:id="@+id/signUpActivity"
-        android:name="com.codedamon.medshare.ui.loginSignUpPages.SignInActivity"
-        android:label="activity_sign_up"
-        tools:layout="@layout/activity_sign_in" />
-    <activity
-        android:id="@+id/splashScreenActivity"
-        android:name="com.codedamon.medshare.ui.SplashScreenActivity"
-        android:label="activity_splashscreen"
-        tools:layout="@layout/activity_splashscreen" />
     <fragment
         android:id="@+id/QRScannerFragment"
         android:name="com.codedamon.medshare.chemist.ui.QRScannerFragment"
@@ -115,5 +101,28 @@
         android:label="fragment_my_rewards"
         tools:layout="@layout/fragment_my_rewards">
 
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.codedamon.medshare.ui.OnBoardingPage.OnBoardingFragment"
+        android:label="fragment_on_boarding"
+        tools:layout="@layout/fragment_on_boarding" />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.codedamon.medshare.ui.SplashScreenFragment"
+        android:label="fragment_splach_screen"
+        tools:layout="@layout/fragment_splach_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment"
+            app:popUpTo="@id/main_navigation" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/main_navigation" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeChemistFragment"
+            app:destination="@id/homeChemistFragment"
+            app:popUpTo="@id/main_navigation" />
     </fragment>
 </navigation>

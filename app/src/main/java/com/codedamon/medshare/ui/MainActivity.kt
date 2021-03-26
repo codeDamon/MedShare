@@ -10,13 +10,12 @@ import com.codedamon.medshare.donor.ui.boxDisplayPage.BoxDisplayViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-class DashboardActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: BoxDisplayViewModel
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
     private lateinit var mAuth:FirebaseAuth
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

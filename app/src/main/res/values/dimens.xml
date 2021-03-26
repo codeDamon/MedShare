@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="smallMargin">8dp</dimen>
+    <dimen name="mediumMargin">16dp</dimen>
+    <dimen name="largeMargin">32dp</dimen>
+
+    <dimen name="smallPadding">8dp</dimen>
+    <dimen name="mediumPadding">16dp</dimen>
+    <dimen name="largePadding">32dp</dimen>
+
+    <dimen name="smallText">14sp</dimen>
+    <dimen name="mediumText">18sp</dimen>
+    <dimen name="largeText">22sp</dimen>
+    <dimen name="extraLargeText">28sp</dimen>
+
+    <dimen name="mediumElevation">8dp</dimen>
+    <dimen name="onBoardingScreenAppNameTopMargin">48dp</dimen>
+    <dimen name="onBoardingScreenGetStartedBottomMargin">96dp</dimen>
+    <dimen name="onBoardingScreenItemImageHeight">200dp</dimen>
+    <dimen name="onBoardingScreenItemImageWidth">200dp</dimen>
+    <dimen name="onBoardingScreenGetStartedWidth">150dp</dimen>
+
+</resources>
