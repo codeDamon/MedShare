@@ -19,6 +19,7 @@ class MedicineRvAdapter(
 
     interface MedBoxInterface{
         fun onExpandClicked();
+        fun onDeleteClicked(position: Int);
     }
 
 
@@ -26,6 +27,7 @@ class MedicineRvAdapter(
 
         val detailsLayout : LinearLayout = view.findViewById(R.id.details_layout)
         val downArrow: ImageView = view.findViewById(R.id.down_arrow)
+        val delete: ImageView = view.findViewById(R.id.delete_med)
         val price:TextView=itemView.findViewById(R.id.tv_perMedCost)
         val quantity:TextView=itemView.findViewById(R.id.tv_quantity)
         val name:TextView=itemView.findViewById(R.id.med_name_tv)
@@ -58,6 +60,9 @@ class MedicineRvAdapter(
                 holder.detailsLayout.visibility = View.VISIBLE
                 holder.downArrow.rotation = 180F
             }
+        }
+        holder.delete.setOnClickListener {
+            mInterface.onDeleteClicked(position)
         }
     }
 

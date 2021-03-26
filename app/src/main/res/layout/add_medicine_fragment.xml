@@ -13,28 +13,54 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
+
         tools:context=".donor.ui.addMedicinePage.AddMedicineFragment">
 
-        <ImageView
-            android:id="@+id/img"
+        <View
+            android:id="@+id/wave_view"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
+            android:background="@drawable/wave_profile"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:layout_marginTop="20dp"
-            android:src="@drawable/med_img"
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_close"
+            app:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="30dp"
+            android:text="Add Medicine"
+            android:textColor="@color/grey_white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/tv1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+
             android:text="@string/medicine_information"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img" />
+            app:layout_constraintTop_toBottomOf="@id/tv2" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/med_name_et"
@@ -42,9 +68,10 @@
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
 
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:hint="@string/name"
             app:endIconMode="clear_text"
             app:layout_constraintTop_toBottomOf="@id/tv1">
@@ -58,6 +85,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/lin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,6 +121,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/lin2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,6 +171,7 @@
         </LinearLayout>
 
         <Button
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/addMedBtn"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
@@ -149,6 +179,18 @@
             android:layout_marginTop="40dp"
             android:text="@string/add_to_box"
             app:layout_constraintTop_toBottomOf="@id/lin2" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+
+            android:src="@drawable/med_img"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

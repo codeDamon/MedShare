@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
-    app:cardCornerRadius="8dp"
-    android:elevation="1.5dp">
+    android:elevation="1.5dp"
+    app:cardCornerRadius="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,22 +14,22 @@
 
         <ImageView
             android:id="@+id/med_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/capsule"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/pill"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/med_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/medicine_name"
-            android:textSize="18sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textStyle="bold"
             android:layout_marginStart="20dp"
+            android:text="@string/medicine_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/med_img"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +37,8 @@
             android:id="@+id/earn_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:text="@string/earn_2_x"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/med_name_tv"
             app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -65,10 +65,10 @@
 
         <LinearLayout
             android:id="@+id/details_layout"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:visibility="gone"
 
             app:layout_constraintTop_toBottomOf="@id/earn_tv">
 
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
 
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:background="#C1BDBD"
                 android:elevation="0.2dp" />
@@ -90,7 +90,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="6dp"
                     android:text="@string/expiry_date"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -101,8 +105,12 @@
                     android:layout_height="wrap_content"
 
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/purple_200"
+                    android:padding="6dp"
                     android:text="01/01/2021"
+
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/tv1"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -112,21 +120,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Price per item" />
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="6dp"
+                    android:text="Price per item"
+
+                    android:textColor="@color/white" />
+
+                <TextView
                     android:id="@+id/tv_perMedCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/purple_200"
+                    android:padding="6dp"
                     android:text="01"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/tv1"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
@@ -134,30 +149,49 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
 
                 <TextView
                     android:id="@+id/tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="6dp"
                     android:text="Quantity"
+
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
 
                 <TextView
+                    android:id="@+id/tv_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_quantity"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+
+                    android:background="@drawable/text_input_shape"
+                    android:backgroundTint="@color/purple_200"
+                    android:padding="6dp"
                     android:text="01"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/tv1"
                     app:layout_constraintTop_toBottomOf="@id/med_name_tv" />
 
             </LinearLayout>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/delete_med"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/ic_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/down_arrow"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

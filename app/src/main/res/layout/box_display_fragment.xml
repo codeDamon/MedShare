@@ -1,56 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".donor.ui.boxDisplayPage.BoxDisplayFragment"
-    android:paddingHorizontal="10dp">
+    tools:context=".donor.ui.boxDisplayPage.BoxDisplayFragment">
 
     <!--android:background="#f5f5f5"-->
+
+    <View
+        android:id="@+id/wave_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/wave_profile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="30dp"
+        android:text="My Help Box"
+        android:textColor="@color/grey_white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/no_data_graphics" />
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="40dp"
-
+        android:layout_marginTop="50dp"
         android:text="@string/medicine_list"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        />
+        android:layout_marginStart="20dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/med_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        app:layout_constraintTop_toBottomOf="@id/tv1"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1"
 
-        tools:listitem="@layout/item_med_box_layout"
-        tools:itemCount="4"/>
+        tools:itemCount="4"
+        tools:listitem="@layout/item_med_box_layout" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/expand_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/qr_button"
-        android:text="@string/generate_qr"
-        app:icon="@drawable/ic_qr_code_24"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_more"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"/>
+        app:tint="@color/grey_white" />
 
-    <Button
-        android:id="@+id/add_med_button"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_med_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_med_page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginBottom="24dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/expand_fab"
+        app:layout_constraintEnd_toEndOf="@+id/expand_fab"
+        app:layout_constraintStart_toStartOf="@+id/expand_fab"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/grey_white" />
+
+    <TextView
+        android:id="@+id/add_med_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Add Medicine"
+        app:layout_constraintBottom_toBottomOf="@+id/add_med_fab"
+        app:layout_constraintEnd_toStartOf="@+id/add_med_fab"
+        app:layout_constraintTop_toTopOf="@+id/add_med_fab" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/generate_qr_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/add_med_fab"
+        app:layout_constraintEnd_toEndOf="@+id/add_med_fab"
+        app:layout_constraintStart_toStartOf="@+id/add_med_fab"
+        app:srcCompat="@drawable/ic_qr_code_24"
+        app:tint="@color/grey_white" />
+
+    <TextView
+        android:id="@+id/scan_qr_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Generate QR"
+        app:layout_constraintBottom_toBottomOf="@+id/generate_qr_fab"
+        app:layout_constraintEnd_toStartOf="@+id/generate_qr_fab"
+        app:layout_constraintTop_toTopOf="@+id/generate_qr_fab" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
