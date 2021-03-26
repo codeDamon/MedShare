@@ -6,51 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.OnBoardingPage.OnBoardingScreenFragment">
 
-    <Button
-        android:id="@+id/next"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/mediumMargin"
-        android:layout_marginBottom="@dimen/mediumMargin"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableEnd="@drawable/ic_arrow_forward"
-        android:padding="@dimen/smallPadding"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/mediumMargin"
-        android:layout_marginBottom="@dimen/mediumMargin"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableStart="@drawable/ic_arrow_back"
-        android:padding="@dimen/smallPadding"
-        android:text="Back"
-        android:textColor="@color/purple_500"
-
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/smallMargin"
-        android:layout_marginEnd="@dimen/mediumMargin"
-        android:background="?android:attr/selectableItemBackground"
-
-        android:text="Skip"
-        android:textColor="@color/purple_500"
-
-        android:textAlignment="viewEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/heading"
         android:layout_width="wrap_content"
@@ -82,10 +37,9 @@
         android:layout_marginTop="@dimen/smallMargin"
         android:textAlignment="center"
         android:textSize="@dimen/smallText"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/onBoardingScreenItemTitle"
         app:layout_constraintVertical_bias="0.15" />
 
     <TextView
@@ -98,18 +52,8 @@
         android:textSize="@dimen/largeText"
         android:textStyle="bold"
         android:text="Hello"
-        app:layout_constraintTop_toBottomOf="@id/tv"
+        app:layout_constraintTop_toBottomOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/onBoardingScreenTabLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/mediumMargin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/next"
-        app:layout_constraintStart_toEndOf="@id/back"
-        app:tabBackground="@drawable/on_boarding_indicator_selector" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

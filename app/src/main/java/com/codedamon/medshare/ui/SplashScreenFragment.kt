@@ -57,9 +57,9 @@ class SplashScreenFragment : Fragment() {
 
         Handler().postDelayed({
             if (user != null) {
-                navController.navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
-            } else {
                 navController.navigate(R.id.action_splashScreenFragment_to_homeFragment)
+            } else {
+                navController.navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
             }
         }, splashTimeOut)
     }

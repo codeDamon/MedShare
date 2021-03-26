@@ -9,6 +9,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.codedamon.medshare.R
 
@@ -16,6 +19,7 @@ class OnBoardingScreenFragment(private val description:String, img: Int, pos : I
 
     private val position = pos
     private val image : Int  = img
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +32,20 @@ class OnBoardingScreenFragment(private val description:String, img: Int, pos : I
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_on_boarding_screen, container, false)
 
-        val viewPager2 = activity?.findViewById<ViewPager2>(R.id.view_pager)
         view.findViewById<TextView>(R.id.tv).text = description
         view.findViewById<ImageView>(R.id.image).setImageDrawable(ContextCompat.getDrawable(requireContext(), image))
 
-        view.findViewById<Button>(R.id.next).setOnClickListener{
-            if(position < 3)
-                viewPager2?.currentItem  = position + 1
-        }
+
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+
+
     }
 }

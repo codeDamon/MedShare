@@ -1,13 +1,18 @@
 package com.codedamon.medshare.ui.loginSignUpPages
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.codedamon.medshare.R
 import com.codedamon.medshare.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -15,13 +20,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class SignInActivity : AppCompatActivity() {
+class SignInFragment : Fragment() {
 
     companion object {
         private const val RC_SIGN_IN = 128
@@ -33,65 +40,88 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var email: TextInputLayout
     private lateinit var password: TextInputLayout
+    private var isDonorAccount: Boolean = true
+
+    private lateinit var navController: NavController
+
 
     val db = Firebase.firestore
 
-    private var isDonorAccount : Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
 
-        email = findViewById(R.id.email_et)
-        password = findViewById(R.id.password_et)
-        findViewById<TextView>(R.id.sign_up_link).setOnClickListener {
-            val intent=Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        email = view.findViewById(R.id.email_et)
+        password = view.findViewById(R.id.password_et)
+        navController = Navigation.findNavController(view)
+
+
+
+        view.findViewById<TextView>(R.id.sign_up_link).setOnClickListener {
+            navController.navigate(R.id.action_signInFragment_to_signUpFragment)
         }
 
         configureGoogleSignIn()
-        findViewById<SignInButton>(R.id.google_sign_in_btn).setOnClickListener {
+        view.findViewById<SignInButton>(R.id.google_sign_in_btn).setOnClickListener {
             signInUsingGoogle()
         }
 
-        findViewById<Button>(R.id.sign_in_button).setOnClickListener {
-            signInUsingEmail()
+        view.findViewById<Button>(R.id.sign_in_button).setOnClickListener {
+            signInUsingEmail(view.findViewById(R.id.radio_group))
         }
     }
 
-    private fun userSignIn(){
+    private fun userSignIn() {
 
         db.collection("users").document(email.editText?.text.toString())
             .get()
             .addOnSuccessListener {
-                if(it!=null){
-                    if(it["type"]!=null){
-                        if(it["type"]=="donor" && isDonorAccount || it["type"]=="chemist" && !isDonorAccount){
-                            signIn(email = email.editText?.text.toString(),
-                                password = password.editText?.text.toString())
-                        }else{
-                            Toast.makeText(applicationContext,
+                if (it != null) {
+                    if (it["type"] != null) {
+                        if (it["type"] == "donor" && isDonorAccount || it["type"] == "chemist" && !isDonorAccount) {
+                            signIn(
+                                email = email.editText?.text.toString(),
+                                password = password.editText?.text.toString()
+                            )
+                        } else {
+                            Toast.makeText(
+                                context,
                                 "Incorrect type selected! Switch between donor and chemist",
-                                Toast.LENGTH_SHORT)
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                         }
-                    }else{
-                        Toast.makeText(applicationContext,
+                    } else {
+                        Toast.makeText(
+                            context,
                             "No account found! Register Now",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                         Log.d(TAG, "No type field in users collection")
                     }
-                }else
+                } else
                     Log.d(TAG, "No account found")
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Log.d(TAG, "Failed with error $it")
             }
     }
 
-    private fun getCurrentUserType(){
-        when(findViewById<RadioGroup>(R.id.radio_group).checkedRadioButtonId){
+    private fun getCurrentUserType(radioGroup: RadioGroup) {
+        when (radioGroup.checkedRadioButtonId) {
             R.id.rad_donor -> {
                 isDonorAccount = true
             }
@@ -104,7 +134,7 @@ class SignInActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val currentUser = mAuth.currentUser
-        if(currentUser != null){
+        if (currentUser != null) {
             //reload();
         }
     }
@@ -112,56 +142,60 @@ class SignInActivity : AppCompatActivity() {
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(requireActivity(), OnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = mAuth.currentUser
                     //updateUI(user)
-                    Toast.makeText(baseContext, "Welcome to MedShare",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context, "Welcome to MedShare",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    val intent=Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if(isDonorAccount)
+                        navController.navigate(R.id.action_signInFragment_to_homeFragment)
+                    else
+                        Toast.makeText(context,"Chemist Account",Toast.LENGTH_SHORT).show()
 
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     //updateUI(null)
                 }
-            }
+            })
         // [END sign_in_with_email]
     }
 
-    private fun signInUsingEmail(){
+    private fun signInUsingEmail(radioGroup: RadioGroup) {
 
-        if(email.editText?.text.toString().isEmpty()){
+        if (email.editText?.text.toString().isEmpty()) {
             email.error = "Please enter your email-id"
             return
         }
-        if(password.editText?.text.toString().isEmpty()){
+        if (password.editText?.text.toString().isEmpty()) {
             password.error = "Please enter password"
             return
         }
-        getCurrentUserType()
+        getCurrentUserType(radioGroup)
 
         userSignIn()
 
     }
 
 
-
-    private fun configureGoogleSignIn(){
+    private fun configureGoogleSignIn() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         //Firebase Auth Instance
         mAuth = FirebaseAuth.getInstance()
@@ -189,30 +223,36 @@ class SignInActivity : AppCompatActivity() {
                     // Google Sign In failed, update UI appropriately
                     Log.w("SignInActivity", "Google sign in failed", e)
                 }
-            }else{
+            } else {
                 Log.w("SignInActivity", exception.toString())
             }
 
         }
     }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(requireActivity(), OnCompleteListener<AuthResult>() { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignInActivity", "signInWithCredential:success")
-                    Toast.makeText(baseContext, "Welcome to MedShare",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context, "Welcome to MedShare",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-                    val intent=Intent(this, MainActivity::class.java)
+                    //TODO
+                    /*val intent=Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()
+                    finish()*/
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("SignInActivity", "signInWithCredential:failure", task.exception)
 
                 }
-            }
+            })
     }
+
+
 }

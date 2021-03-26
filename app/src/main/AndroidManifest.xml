@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedShare">
-        <activity android:name=".ui.loginSignUpPages.SignUpActivity" />
-        <activity android:name=".ui.loginSignUpPages.SignInActivity" />
+
         <activity android:name=".ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
