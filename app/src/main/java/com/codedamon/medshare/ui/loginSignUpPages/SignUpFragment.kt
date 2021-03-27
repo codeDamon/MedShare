@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
+import com.codedamon.medshare.helper.MySharedPrefManager
 import com.codedamon.medshare.ui.MainActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -52,6 +53,8 @@ class SignUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        MySharedPrefManager.initializeSharedPref(requireActivity())
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
@@ -158,8 +161,10 @@ class SignUpFragment : Fragment() {
                             ).show()
 
                             if(userEnteredValue["type"]=="donor"){
+                                MySharedPrefManager.setUserType(true)
                                 navController.navigate(R.id.action_signUpFragment_to_homeFragment)
                             }else{
+                                MySharedPrefManager.setUserType(false)
                                 navController.navigate(R.id.action_signUpFragment_to_homeChemistFragment)
                             }
 

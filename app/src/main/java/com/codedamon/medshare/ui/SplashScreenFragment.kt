@@ -2,19 +2,25 @@ package com.codedamon.medshare.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
+import com.codedamon.medshare.helper.MySharedPrefManager
+import com.codedamon.medshare.ui.loginSignUpPages.SignInFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class SplashScreenFragment : Fragment() {
 
@@ -22,6 +28,7 @@ class SplashScreenFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private var user: FirebaseUser? = null
     private lateinit var navController: NavController
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,8 @@ class SplashScreenFragment : Fragment() {
         )
 
         mAuth = FirebaseAuth.getInstance()
+
+        MySharedPrefManager.initializeSharedPref(requireActivity())
     }
 
     override fun onCreateView(
@@ -57,7 +66,12 @@ class SplashScreenFragment : Fragment() {
 
         Handler().postDelayed({
             if (user != null) {
-                navController.navigate(R.id.action_splashScreenFragment_to_homeFragment)
+
+                if(MySharedPrefManager.getIsDonor())
+                    navController.navigate(R.id.action_splashScreenFragment_to_homeFragment)
+                else
+                    navController.navigate(R.id.action_splashScreenFragment_to_homeChemistFragment)
+
             } else {
                 navController.navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
             }
@@ -70,4 +84,5 @@ class SplashScreenFragment : Fragment() {
         val l1: LinearLayout = view.findViewById<LinearLayout>(R.id.l1)
         l1.animation = AnimationUtils.loadAnimation(context, R.anim.up_to_down_anim)
     }
+
 }

@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.security.Permission
 import java.util.jar.Manifest
 
@@ -30,13 +31,19 @@ class HomeChemistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView?.visibility = View.VISIBLE
+
         return inflater.inflate(R.layout.home_chemist_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeChemistViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

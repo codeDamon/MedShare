@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
+import com.codedamon.medshare.helper.MySharedPrefManager
 import com.codedamon.medshare.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -48,6 +49,7 @@ class SignInFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        MySharedPrefManager.initializeSharedPref(requireActivity())
     }
 
     override fun onCreateView(
@@ -90,6 +92,7 @@ class SignInFragment : Fragment() {
                 if (it != null) {
                     if (it["type"] != null) {
                         if (it["type"] == "donor" && isDonorAccount || it["type"] == "chemist" && !isDonorAccount) {
+                            MySharedPrefManager.setUserType(isDonorAccount)
                             signIn(
                                 email = email.editText?.text.toString(),
                                 password = password.editText?.text.toString()
