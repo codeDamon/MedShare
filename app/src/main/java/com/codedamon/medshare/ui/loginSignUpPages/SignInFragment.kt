@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RadioGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
@@ -40,6 +37,7 @@ class SignInFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var email: TextInputLayout
     private lateinit var password: TextInputLayout
+    private lateinit var progressBar: ProgressBar
     private var isDonorAccount: Boolean = true
 
     private lateinit var navController: NavController
@@ -66,7 +64,7 @@ class SignInFragment : Fragment() {
         email = view.findViewById(R.id.email_et)
         password = view.findViewById(R.id.password_et)
         navController = Navigation.findNavController(view)
-
+        progressBar = view.findViewById(R.id.progress_bar)
 
 
         view.findViewById<TextView>(R.id.sign_up_link).setOnClickListener {
@@ -79,6 +77,7 @@ class SignInFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.sign_in_button).setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             signInUsingEmail(view.findViewById(R.id.radio_group))
         }
     }
@@ -102,6 +101,8 @@ class SignInFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
+                            progressBar.visibility = View.GONE
+
                         }
                     } else {
                         Toast.makeText(
@@ -111,9 +112,12 @@ class SignInFragment : Fragment() {
                         )
                             .show()
                         Log.d(TAG, "No type field in users collection")
+                        progressBar.visibility = View.GONE
                     }
-                } else
+                } else {
                     Log.d(TAG, "No account found")
+                    progressBar.visibility = View.GONE
+                }
             }
             .addOnFailureListener {
                 Log.d(TAG, "Failed with error $it")
@@ -153,10 +157,14 @@ class SignInFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
+                    progressBar.visibility = View.GONE
+
+
                     if(isDonorAccount)
                         navController.navigate(R.id.action_signInFragment_to_homeFragment)
-                    else
-                        Toast.makeText(context,"Chemist Account",Toast.LENGTH_SHORT).show()
+                    else {
+                        navController.navigate(R.id.action_signInFragment_to_homeChemistFragment)
+                    }
 
                 } else {
                     // If sign in fails, display a message to the user.
@@ -166,6 +174,8 @@ class SignInFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                     //updateUI(null)
+                    progressBar.visibility = View.GONE
+
                 }
             })
         // [END sign_in_with_email]
@@ -175,10 +185,12 @@ class SignInFragment : Fragment() {
 
         if (email.editText?.text.toString().isEmpty()) {
             email.error = "Please enter your email-id"
+            progressBar.visibility = View.GONE
             return
         }
         if (password.editText?.text.toString().isEmpty()) {
             password.error = "Please enter password"
+            progressBar.visibility = View.GONE
             return
         }
         getCurrentUserType(radioGroup)

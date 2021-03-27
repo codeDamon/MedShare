@@ -57,6 +57,10 @@
             app:destination="@id/myRewardsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_signInFragment2"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/main_navigation" />
     </fragment>
 
     <fragment
@@ -137,10 +141,12 @@
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_signInFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/main_navigation" />
         <action
             android:id="@+id/action_signInFragment_to_homeChemistFragment"
-            app:destination="@id/homeChemistFragment" />
+            app:destination="@id/homeChemistFragment"
+            app:popUpTo="@id/main_navigation" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -152,9 +158,14 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/main_navigation" />
         <action
             android:id="@+id/action_signUpFragment_to_homeChemistFragment"
             app:destination="@id/homeChemistFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/main_navigation" />
     </fragment>
 </navigation>

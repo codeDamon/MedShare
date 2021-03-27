@@ -87,6 +87,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             /*val intent = Intent(context, SignInActivity::class.java)
                             startActivity(intent)
                             activity?.finish()*/
+                            navController.navigate(R.id.action_profileFragment_to_signInFragment2)
                         }
                         .show()
                 }
