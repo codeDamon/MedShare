@@ -17,7 +17,8 @@ class MedicineReceiveRvAdapter(val context: Context,
                                ) : RecyclerView.Adapter<MedicineReceiveRvAdapter.MedReceiveViewHolder>(){
 
     interface MedReceiveBoxInterface{
-        fun onExpandClicked();
+        fun onExpandClicked()
+        fun deleteMed(position: Int)
     }
 
 
@@ -29,12 +30,13 @@ class MedicineReceiveRvAdapter(val context: Context,
         val quantity: TextView =itemView.findViewById(R.id.tv_quantity)
         val name: TextView =itemView.findViewById(R.id.med_name_tv)
         val expiryDate: TextView =itemView.findViewById(R.id.expiry_date_tv)
+        val delete : ImageView = itemView.findViewById(R.id.delete_med)
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedReceiveViewHolder {
         val itemView= LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_med_box_layout, parent, false)
+            .inflate(R.layout.item_box_receive, parent, false)
         return MedReceiveViewHolder(itemView)
     }
 
@@ -45,6 +47,10 @@ class MedicineReceiveRvAdapter(val context: Context,
         holder.expiryDate.text=currentMedicine.expiryDate.toString()
         holder.price.text="\u20B9"+currentMedicine.price.toString()
         holder.quantity.text=currentMedicine.quantity.toString()
+
+        holder.delete.setOnClickListener {
+            mInterface.deleteMed(position)
+        }
 
         holder.itemView.setOnClickListener {
             mInterface.onExpandClicked()

@@ -18,7 +18,16 @@
         android:id="@+id/homeFragment"
         android:name="com.codedamon.medshare.donor.ui.homePage.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_boxDisplayFragment"
+            app:destination="@id/boxDisplayFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
         android:name="com.codedamon.medshare.donor.ui.boxDisplayPage.BoxDisplayFragment"
@@ -80,6 +89,9 @@
         <action
             android:id="@+id/action_homeChemistFragment_to_QRScannerFragment"
             app:destination="@id/QRScannerFragment" />
+        <action
+            android:id="@+id/action_homeChemistFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxReceiveFragment"

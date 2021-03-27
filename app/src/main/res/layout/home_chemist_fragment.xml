@@ -6,19 +6,127 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".chemist.ui.homePageChemist.HomeChemistFragment">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/page_header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="24sp"
-        android:text="Home Chemist Fragment" />
+        android:layout_height="300dp"
+        android:background="@drawable/login_banner_shape"
+        android:backgroundTint="@color/purple_500"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <Button
+        <ImageView
+            android:id="@+id/sd_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+
+            android:src="@drawable/ic_eco_24"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="20dp"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
+            android:textSize="45sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sign_out_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:id="@+id/scan_qr"
-        android:text="scan qr"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:contentDescription="sign out"
 
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/grey_white"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_sign_out"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/page_header"
+        app:layout_constraintTop_toBottomOf="@id/page_header" >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/scan_qr"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+
+            android:layout_weight="1"
+            app:cardElevation="2dp"
+            android:padding="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_margin="5dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+
+                    android:src="@drawable/ic_qr_code_scanner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Scan QR code"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+
+            android:layout_weight="1"
+            app:cardElevation="2dp"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+
+            app:cardCornerRadius="10dp"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+
+                    android:src="@drawable/ic_done_all"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Transactions"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

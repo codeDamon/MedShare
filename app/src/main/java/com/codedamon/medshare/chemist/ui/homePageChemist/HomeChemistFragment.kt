@@ -8,13 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import java.security.Permission
 import java.util.jar.Manifest
 
@@ -26,15 +30,17 @@ class HomeChemistFragment : Fragment() {
 
     private lateinit var viewModel: HomeChemistViewModel
     private lateinit var navController: NavController
+    private lateinit var mAuth: FirebaseAuth
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val bottomNavigationView =
+        /*val bottomNavigationView =
             activity?.findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView?.visibility = View.VISIBLE
+        bottomNavigationView?.visibility = View.VISIBLE*/
 
         return inflater.inflate(R.layout.home_chemist_fragment, container, false)
     }
@@ -50,8 +56,33 @@ class HomeChemistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+        mAuth = FirebaseAuth.getInstance()
 
-        view.findViewById<Button>(R.id.scan_qr).setOnClickListener {
+        view.findViewById<ImageView>(R.id.sign_out_iv).setOnClickListener {
+
+            context?.let {
+                MaterialAlertDialogBuilder(it)
+                    .setTitle("Logging out")
+                    .setMessage("Are you sure you want to logout?")
+                    .setNegativeButton("Cancel") { dialog, which ->
+                        // Respond to negative button press
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton("Logout") { dialog, which ->
+                        // Respond to positive button press
+                        mAuth.signOut()
+                        dialog.dismiss()
+
+                        /*val intent = Intent(context, SignInActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()*/
+                        navController.navigate(R.id.action_homeChemistFragment_to_signInFragment)
+                    }
+                    .show()
+            }
+        }
+
+        view.findViewById<CardView>(R.id.scan_qr).setOnClickListener {
             openScanner()
         }
     }

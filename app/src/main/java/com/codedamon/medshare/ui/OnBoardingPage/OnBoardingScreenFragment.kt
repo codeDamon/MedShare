@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.codedamon.medshare.R
 
-class OnBoardingScreenFragment(private val description:String, img: Int, pos : Int) : Fragment() {
+class OnBoardingScreenFragment(private val title: String, private val description:String, img: Int, pos : Int) : Fragment() {
 
     private val position = pos
     private val image : Int  = img
@@ -32,7 +32,8 @@ class OnBoardingScreenFragment(private val description:String, img: Int, pos : I
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_on_boarding_screen, container, false)
 
-        view.findViewById<TextView>(R.id.tv).text = description
+        view.findViewById<TextView>(R.id.description_tv).text = description
+        view.findViewById<TextView>(R.id.onBoardingScreenItemTitle).text = title
         view.findViewById<ImageView>(R.id.image).setImageDrawable(ContextCompat.getDrawable(requireContext(), image))
 
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -49,6 +50,12 @@ class HomeFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        view.findViewById<CardView>(R.id.help_box).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_boxDisplayFragment)
+        }
+        view.findViewById<CardView>(R.id.profile).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_profileFragment)
+        }
 
         /*view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_homeChemistFragment)

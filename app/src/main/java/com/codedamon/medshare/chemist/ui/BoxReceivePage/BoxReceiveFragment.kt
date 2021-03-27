@@ -15,12 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.chemist.adapter.MedicineReceiveRvAdapter
+import com.codedamon.medshare.model.Transaction
 import com.codedamon.medshare.model.medicine.Medicine
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInterface {
@@ -60,6 +66,9 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
         args.list?.let { extractStringToObj(it) }
 
 
+        view.findViewById<FloatingActionButton>(R.id.approve).setOnClickListener{
+            approveMedicines()
+        }
 
         recyclerView = view.findViewById(R.id.box_receive_rv)
         initRecycleView()
@@ -78,6 +87,26 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
 
         val med = Medicine("Paracetamol", 20.5, 10, "20-01-2022")
         list.add(med)
+    }
+
+    private fun approveMedicines(){
+
+        val sdf = SimpleDateFormat("dd-MMMM,yyyy-HH:mm")
+        val c: Calendar = Calendar.getInstance()
+
+        val dateTime = sdf.format(c.time)
+
+        val trans = Transaction("Local Chemist",10,200,dateTime)
+        addVoteToFirebase("Apurv",trans,dateTime)
+    }
+
+    private fun addVoteToFirebase(user: String, transaction:Transaction,date:String ) {
+
+        val rootNode = FirebaseDatabase.getInstance();
+        val tranRef = rootNode.getReference("user_transactions")
+
+        tranRef.child(user).child(date).setValue(transaction)
+
     }
 
     private fun extractStringToObj(s: String) {
@@ -100,7 +129,7 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
         }
     }
 
-    fun isJson(Json: String): Boolean {
+    private fun isJson(Json: String): Boolean {
         try {
             JSONObject(Json)
         } catch (ex: JSONException) {
@@ -116,5 +145,11 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
     override fun onExpandClicked() {
 
     }
+
+    override fun deleteMed(position: Int) {
+        list.remove(list[position])
+        adapter.notifyDataSetChanged()
+    }
+
 
 }

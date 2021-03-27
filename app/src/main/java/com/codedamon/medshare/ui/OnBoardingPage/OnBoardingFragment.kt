@@ -29,12 +29,23 @@ class OnBoardingFragment : Fragment(){
         val view = inflater.inflate(R.layout.fragment_on_boarding, container, false)
 
         val fragmentList = arrayListOf<OnBoardingScreenFragment>(
-            OnBoardingScreenFragment("Welcome0", R.drawable.donation, 0),
-            OnBoardingScreenFragment("Welcome1", R.drawable.people_with_med, 1),
-            OnBoardingScreenFragment("Welcome2", R.drawable.chemist_logo, 2),
-            OnBoardingScreenFragment("Welcome3", R.drawable.collect_hearts, 3),
-            OnBoardingScreenFragment("Welcome3", R.drawable.save_earth, 4)
+            OnBoardingScreenFragment("Have leftover meds?",
+                "We take surplus medicines off of your hands\n\n and\n\n get them to people who need them.", R.drawable.donation, 0),
 
+            OnBoardingScreenFragment("Do you know?",
+                "3,400,000,000+ \n\n packs of medicines are thrown away \n every year  ",
+                R.drawable.people_with_med, 1),
+
+            OnBoardingScreenFragment("Visit",
+                "Visit registered chemist to donate \n\n Verify your meds",
+                R.drawable.chemist_logo, 2),
+
+            OnBoardingScreenFragment("Earn Redeem",
+                "Donors will earn hearts\n\n1 heart = 1 \u20B9 \n\n Redeem anytime",
+                R.drawable.collect_hearts, 3),
+
+            OnBoardingScreenFragment("Save Medicine \n\n Save Earth",
+                "Reduce medicinal waste \n\n Clean earth", R.drawable.save_earth, 4)
         )
 
         val adapter = OnBoardingAdapter(
