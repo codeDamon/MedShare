@@ -1,10 +1,13 @@
 package com.codedamon.medshare.chemist.ui.BoxReceivePage
 
+import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.chemist.adapter.MedicineReceiveRvAdapter
+import com.codedamon.medshare.helper.MySharedPrefManager
 import com.codedamon.medshare.model.Transaction
 import com.codedamon.medshare.model.medicine.Medicine
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +44,8 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
     private lateinit var adapter: MedicineReceiveRvAdapter
     private lateinit var list: ArrayList<Medicine>
     private lateinit var navController: NavController
+    lateinit var loadingDialog: Dialog
+
 
     val args: BoxReceiveFragmentArgs by navArgs()
 
@@ -67,7 +73,14 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
 
 
         view.findViewById<FloatingActionButton>(R.id.approve).setOnClickListener{
+
+            showLoadingDialog()
             approveMedicines()
+            Handler().postDelayed({
+
+                loadingDialog.dismiss()
+                navController.navigate(R.id.action_boxReceiveFragment_to_homeChemistFragment)
+            }, 2000)
         }
 
         recyclerView = view.findViewById(R.id.box_receive_rv)
@@ -90,7 +103,6 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
     }
 
     private fun approveMedicines(){
-
         val sdf = SimpleDateFormat("dd-MMMM,yyyy-HH:mm")
         val c: Calendar = Calendar.getInstance()
 
@@ -107,6 +119,18 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
 
         tranRef.child(user).child(date).setValue(transaction)
 
+
+
+    }
+
+    private fun showLoadingDialog() {
+        loadingDialog = Dialog(requireContext())
+        loadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+        loadingDialog.setCancelable(true)
+
+        loadingDialog.setContentView(R.layout.dialog_loading_success)
+        loadingDialog.show()
     }
 
     private fun extractStringToObj(s: String) {

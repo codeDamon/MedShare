@@ -18,7 +18,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
 
-            android:src="@drawable/pill" />
+            android:src="@drawable/capsule" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -27,6 +27,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/chemist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -35,6 +36,7 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -44,6 +46,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/hearts_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -57,6 +60,7 @@
             android:src="@drawable/ic_heart_24" />
 
         <TextView
+            android:id="@+id/points_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

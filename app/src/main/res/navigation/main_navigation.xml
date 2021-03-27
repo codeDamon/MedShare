@@ -91,7 +91,8 @@
             app:destination="@id/QRScannerFragment" />
         <action
             android:id="@+id/action_homeChemistFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/main_navigation" />
     </fragment>
     <fragment
         android:id="@+id/boxReceiveFragment"
@@ -103,6 +104,9 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_boxReceiveFragment_to_homeChemistFragment"
+            app:destination="@id/homeChemistFragment" />
     </fragment>
     <fragment
         android:id="@+id/myDonationsFragment"
