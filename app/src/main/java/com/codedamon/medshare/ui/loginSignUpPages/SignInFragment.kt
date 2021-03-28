@@ -44,7 +44,7 @@ class SignInFragment : Fragment() {
     private lateinit var navController: NavController
 
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +90,11 @@ class SignInFragment : Fragment() {
             .get()
             .addOnSuccessListener {
                 if (it != null) {
+                    if(it["username"]!=null){
+                        MySharedPrefManager.setUserName(it["username"].toString())
+                    }
+
+
                     if (it["type"] != null) {
                         if (it["type"] == "donor" && isDonorAccount || it["type"] == "chemist" && !isDonorAccount) {
                             MySharedPrefManager.setUserType(isDonorAccount)

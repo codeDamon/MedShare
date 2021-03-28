@@ -21,6 +21,7 @@ class LeaderboardRvAdapter(val list: ArrayList<DonorLeader>)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardViewHolder {
         val itemView= LayoutInflater.from(parent.context)
             .inflate(R.layout.item_leaderboard_rv, parent, false)
+
         return LeaderboardViewHolder(itemView)
     }
 

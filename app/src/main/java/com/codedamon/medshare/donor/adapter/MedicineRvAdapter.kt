@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.model.medicine.Medicine
+import kotlin.math.roundToInt
 
 class MedicineRvAdapter(
     val context: Context, private val mInterface: MedBoxInterface)
@@ -32,6 +33,7 @@ class MedicineRvAdapter(
         val quantity:TextView=itemView.findViewById(R.id.tv_quantity)
         val name:TextView=itemView.findViewById(R.id.med_name_tv)
         val expiryDate:TextView=itemView.findViewById(R.id.expiry_date_tv)
+        val earnTv : TextView = itemView.findViewById(R.id.earn_tv)
 
     }
 
@@ -64,6 +66,14 @@ class MedicineRvAdapter(
         holder.delete.setOnClickListener {
             mInterface.onDeleteClicked(position)
         }
+
+        holder.earnTv.text = "Earn "+calculateHearts(position)
+    }
+
+    private fun calculateHearts(position: Int): String {
+        val value = allMedicine[position].price * allMedicine[position].quantity
+        val hearts = (value * 0.2).roundToInt()
+        return hearts.toString()
     }
 
     fun updateList(newList: List<Medicine>){

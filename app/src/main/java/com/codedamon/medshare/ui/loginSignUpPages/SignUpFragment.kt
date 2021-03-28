@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
 import com.codedamon.medshare.helper.MySharedPrefManager
+import com.codedamon.medshare.model.User
 import com.codedamon.medshare.ui.MainActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -65,6 +66,7 @@ class SignUpFragment : Fragment() {
         password = view.findViewById(R.id.password_et)
         navController = Navigation.findNavController(view)
         progressBar = view.findViewById(R.id.progress_bar)
+        username = view.findViewById(R.id.name_et)
 
 
         auth = Firebase.auth
@@ -142,16 +144,14 @@ class SignUpFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
 
-                    val userEnteredValue = hashMapOf<String, String>(
-                        "type" to when (isDonorSignIn(view)) {
+                    val userEnteredType = when (isDonorSignIn(view)) {
                             true -> "donor"
                             false -> "chemist"
                         }
-                    )
-
+                    val newUser = User(name, userEnteredType)
 
                     db.collection("users").document(this.email.editText?.text.toString())
-                        .set(userEnteredValue)
+                        .set(newUser)
                         .addOnSuccessListener {
 
                             Log.d(TAG, "User Created")
@@ -160,7 +160,8 @@ class SignUpFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            if(userEnteredValue["type"]=="donor"){
+                            if(userEnteredType=="donor"){
+                                createDonor(name)
                                 MySharedPrefManager.setUserType(true)
                                 navController.navigate(R.id.action_signUpFragment_to_homeFragment)
                             }else{
@@ -189,6 +190,21 @@ class SignUpFragment : Fragment() {
                     progressBar.visibility = View.GONE
                     //updateUI(null)
                 }
+            }
+    }
+
+    private fun createDonor(username: String) {
+
+        val donor = hashMapOf<String,Int>("points" to 0)
+
+        db.collection("donors").document(username)
+            .set(donor)
+            .addOnSuccessListener {
+
+                Log.d(TAG, "Donor Created")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error creating Donor", e)
             }
     }
 

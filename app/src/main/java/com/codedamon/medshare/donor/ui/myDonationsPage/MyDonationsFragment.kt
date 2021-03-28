@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.donor.adapter.MyDonationsAdapter
 import com.codedamon.medshare.donor.model.MyDonation
+import com.codedamon.medshare.helper.MySharedPrefManager
 import com.google.firebase.database.*
 import com.google.gson.Gson
 
@@ -33,7 +34,13 @@ class MyDonationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        getDonations("")
+
+
+        MySharedPrefManager.initializeSharedPref(requireActivity())
+        val username = MySharedPrefManager.getUserName()
+
+            getDonations(username!!)
+
         return inflater.inflate(R.layout.fragment_my_donations, container, false)
     }
 
@@ -49,7 +56,9 @@ class MyDonationsFragment : Fragment() {
     }
 
     private fun getDonations(user:String){
-        val ref: DatabaseReference = FirebaseDatabase.getInstance().reference.child("user_transactions").child("Apurv")
+        val ref: DatabaseReference = FirebaseDatabase.getInstance().reference
+            .child("user_transactions")
+            .child(user)
         val check: Query = ref.orderByKey()
 
         check.addListenerForSingleValueEvent(object : ValueEventListener {

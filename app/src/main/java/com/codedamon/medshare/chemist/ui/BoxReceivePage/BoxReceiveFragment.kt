@@ -1,6 +1,8 @@
 package com.codedamon.medshare.chemist.ui.BoxReceivePage
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -8,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +22,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codedamon.medshare.R
 import com.codedamon.medshare.chemist.adapter.MedicineReceiveRvAdapter
-import com.codedamon.medshare.helper.MySharedPrefManager
+import com.codedamon.medshare.chemist.model.ChemistTransaction
 import com.codedamon.medshare.model.Transaction
 import com.codedamon.medshare.model.medicine.Medicine
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import org.json.JSONArray
@@ -31,7 +37,7 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
+import kotlin.math.roundToInt
 
 class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInterface {
 
@@ -46,6 +52,7 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
     private lateinit var navController: NavController
     lateinit var loadingDialog: Dialog
 
+    private val db = Firebase.firestore
 
     val args: BoxReceiveFragmentArgs by navArgs()
 
@@ -74,13 +81,32 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
 
         view.findViewById<FloatingActionButton>(R.id.approve).setOnClickListener{
 
-            showLoadingDialog()
-            approveMedicines()
-            Handler().postDelayed({
+            val alertDialog = AlertDialog.Builder(
+                context
+            )
+            alertDialog.setMessage("Enter Donor Name")
 
-                loadingDialog.dismiss()
-                navController.navigate(R.id.action_boxReceiveFragment_to_homeChemistFragment)
-            }, 2000)
+            val input = EditText(context)
+            alertDialog.setView(input)
+
+            alertDialog.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, _ ->
+                if(input.text.isNullOrEmpty()) {
+                    Toast.makeText(context,"Failed! Please enter donor name", Toast.LENGTH_SHORT).show()
+                }else{
+                    showLoadingDialog()
+                    approveMedicines(input.text.trim().toString())
+                    Handler().postDelayed({
+
+                        loadingDialog.dismiss()
+                        navController.navigate(R.id.action_boxReceiveFragment_to_homeChemistFragment)
+                    }, 1000)
+                }
+            })
+            alertDialog.setNegativeButton("Cancel",DialogInterface.OnClickListener{ dialog, which ->
+                dialog.cancel()
+            })
+            alertDialog.show()
+
         }
 
         recyclerView = view.findViewById(R.id.box_receive_rv)
@@ -89,36 +115,80 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
 
     private fun initRecycleView() {
         recyclerView.setHasFixedSize(true)
-        initList()
         adapter = MedicineReceiveRvAdapter(requireContext(), list, this)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
     }
 
-    private fun initList() {
-
-        val med = Medicine("Paracetamol", 20.5, 10, "20-01-2022")
-        list.add(med)
-    }
-
-    private fun approveMedicines(){
+    private fun approveMedicines(user: String){
         val sdf = SimpleDateFormat("dd-MMMM,yyyy-HH:mm")
         val c: Calendar = Calendar.getInstance()
 
         val dateTime = sdf.format(c.time)
 
-        val trans = Transaction("Local Chemist",10,200,dateTime)
-        addVoteToFirebase("Apurv",trans,dateTime)
+        val hearts = calculateHeart()
+        val trans = Transaction("Local Chemist", hearts, calculatePoints(hearts), dateTime)
+        addTranToFirebase(user, trans, dateTime)
     }
 
-    private fun addVoteToFirebase(user: String, transaction:Transaction,date:String ) {
+    private fun calculateHeart():Int{
+        var hearts : Int = 0
+        for (med in list){
+            hearts+=((med.quantity*med.price)*0.2).roundToInt()
+        }
+        return hearts
+    }
+
+    private fun calculatePoints(hearts: Int):Int{
+        return when{
+            (hearts <20) ->
+                100
+            (hearts<50) ->
+                200
+            (hearts<100)->
+                500
+            else ->
+                700
+        }
+    }
+
+    private fun addTranToFirebase(user: String, transaction: Transaction, date: String) {
 
         val rootNode = FirebaseDatabase.getInstance();
         val tranRef = rootNode.getReference("user_transactions")
+        val chemistTranRef = rootNode.getReference("chemist_transactions")
 
         tranRef.child(user).child(date).setValue(transaction)
 
+
+        val chemistTransaction = ChemistTransaction(user,transaction)
+        chemistTranRef.child("Local Chemist").setValue(chemistTransaction)
+
+        updateDonorPoints(user,transaction.points)
+    }
+
+    private fun updateDonorPoints(user:String,newPoints:Int){
+
+        var points = 0
+        val docRef = db.collection("donors").document(user)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d("TAG11", "DocumentSnapshot data: ${document.data}")
+                    points=newPoints+document["points"].toString().toInt()
+                    db.collection("donors").document(user)
+                        .update(mapOf(
+                            "points" to points,
+                        ))
+
+                } else {
+                    Log.d("TAG11", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("TAG11", "get failed with ", exception)
+            }
 
 
     }
@@ -142,8 +212,6 @@ class BoxReceiveFragment : Fragment(), MedicineReceiveRvAdapter.MedReceiveBoxInt
         }
 
         val convertedJsonArray: JsonArray = Gson().fromJson(s, JsonArray::class.java)
-
-
 
         for (jsonObject in convertedJsonArray) {
             val obj = jsonObject.asString

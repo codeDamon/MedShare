@@ -56,12 +56,11 @@ class HomeFragment : Fragment() {
         view.findViewById<CardView>(R.id.profile).setOnClickListener {
             navController.navigate(R.id.action_homeFragment_to_profileFragment)
         }
-
-        /*view.findViewById<Button>(R.id.chemist_button).setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_homeChemistFragment)
-        }*/
-        /*view.findViewById<Button>(R.id.onBoarding_button).setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_onBoardingFragment)
-        }*/
+        view.findViewById<CardView>(R.id.rewards).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_myRewardsFragment)
+        }
+        view.findViewById<CardView>(R.id.donation).setOnClickListener {
+            navController.navigate(R.id.action_homeFragment_to_myDonationsFragment)
+        }
     }
 }

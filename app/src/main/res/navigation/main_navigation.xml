@@ -27,6 +27,12 @@
             android:id="@+id/action_homeFragment_to_boxDisplayFragment"
             app:destination="@id/boxDisplayFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myDonationsFragment"
+            app:destination="@id/myDonationsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myRewardsFragment"
+            app:destination="@id/myRewardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxDisplayFragment"
@@ -106,7 +112,10 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_boxReceiveFragment_to_homeChemistFragment"
-            app:destination="@id/homeChemistFragment" />
+            app:destination="@id/homeChemistFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/homeChemistFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/myDonationsFragment"

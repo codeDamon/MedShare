@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codedamon.medshare.R
+import com.codedamon.medshare.helper.MySharedPrefManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 
@@ -48,6 +49,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         view.findViewById<LinearLayout>(R.id.my_donations_lay).setOnClickListener(this)
         view.findViewById<LinearLayout>(R.id.my_rewards_lay).setOnClickListener(this)
 
+        MySharedPrefManager.initializeSharedPref(requireActivity())
+        val username = MySharedPrefManager.getUserName()
+
+        username?.let{
+            name.text = it
+        }
 
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser

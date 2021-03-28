@@ -11,6 +11,7 @@ object MySharedPrefManager{
     }
 
     private val isDonor = "DONOR_USER"
+    private val user = "USER_NAME"
     private var sharedPref: SharedPreferences? = null
 
     fun initializeSharedPref(activity: Activity){
@@ -34,5 +35,20 @@ object MySharedPrefManager{
         if(sharedPref==null) return true
 
         return sharedPref!!.getBoolean(isDonor, true)
+    }
+
+    fun setUserName(username:String):Int{
+        if(sharedPref==null) return -1
+        with (sharedPref!!.edit()) {
+            putString(user, username )
+            apply()
+        }
+        return 1
+    }
+
+    fun getUserName():String?{
+        if(sharedPref==null) return null
+
+        return sharedPref!!.getString(user, null)
     }
 }
